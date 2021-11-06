@@ -1,14 +1,9 @@
 package com.mayada1994.mydictionary.utils
 
 import com.mayada1994.mydictionary.R
+import com.mayada1994.mydictionary.entities.LanguageInfo
 
 object LanguageUtils {
-
-    data class LanguageInfo(
-        val nameRes: Int,
-        val locale: String,
-        val imageRes: Int
-    )
 
     private val languages = listOf(
         LanguageInfo(
@@ -71,5 +66,7 @@ object LanguageUtils {
     val languagesTotal: Int = languages.size
 
     fun getLanguageByCode(code: String): LanguageInfo? = languages.find { it.locale == code }
+
+    fun getLanguages(): List<LanguageInfo> = languages
 
 }
