@@ -7,4 +7,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "My Dictionary"
-include ':app'
+include ':mvc'

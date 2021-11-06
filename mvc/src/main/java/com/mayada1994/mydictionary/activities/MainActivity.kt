@@ -1,4 +1,4 @@
-package com.mayada1994.mydictionary
+package com.mayada1994.mydictionary.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
