@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">My Dictionary</string>
+    <string name="arabic_language">Арабська</string>
+    <string name="chinese_language">Китайська</string>
+    <string name="english_language">Англійська</string>
+    <string name="french_language">Французька</string>
+    <string name="german_language">Німецька</string>
+    <string name="italian_language">Італійська</string>
+    <string name="japanese_language">Японська</string>
+    <string name="korean_language">Корейська</string>
+    <string name="polish_language">Польська</string>
+    <string name="spanish_language">Іспанська</string>
+    <string name="turkish_language">Турецька</string>
 </resources>
