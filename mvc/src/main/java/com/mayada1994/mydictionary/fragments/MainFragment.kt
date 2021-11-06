@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mayada1994.mydictionary.databinding.FragmentMainBinding
+import com.mayada1994.mydictionary.entities.Language
 
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+
+    private var defaultLanguage: Language? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

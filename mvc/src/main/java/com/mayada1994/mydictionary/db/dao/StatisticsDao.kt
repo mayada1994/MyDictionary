@@ -8,7 +8,7 @@ import io.reactivex.Single
 @Dao
 interface StatisticsDao {
 
-    @Query("SELECT * FROM words WHERE language=:language")
+    @Query("SELECT * FROM statistics WHERE language=:language")
     fun getStatisticsByLanguage(language: Int): Single<List<Statistics>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

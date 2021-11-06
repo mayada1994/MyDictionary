@@ -1,6 +1,7 @@
 package com.mayada1994.mydictionary.di
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.mayada1994.mydictionary.db.DictionaryDatabase
 import com.mayada1994.mydictionary.db.dao.LanguageDao
@@ -9,6 +10,7 @@ import com.mayada1994.mydictionary.db.dao.WordDao
 import com.mayada1994.mydictionary.models.LanguageDataSource
 import com.mayada1994.mydictionary.models.StatisticsDataSource
 import com.mayada1994.mydictionary.models.WordDataSource
+import com.mayada1994.mydictionary.utils.CacheUtils
 
 object DictionaryComponent {
 
@@ -32,6 +34,14 @@ object DictionaryComponent {
     val statisticsDataSource: StatisticsDataSource by lazy { StatisticsDataSource(statisticsDao) }
 
     val wordDataSource: WordDataSource by lazy { WordDataSource(wordDao) }
+
+    val cacheUtils: CacheUtils by lazy {
+        CacheUtils(
+            PreferenceManager.getDefaultSharedPreferences(
+                application
+            )
+        )
+    }
 
     fun init(application: Application) {
         DictionaryComponent.application = application
