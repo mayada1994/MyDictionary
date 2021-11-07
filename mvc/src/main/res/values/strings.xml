@@ -11,4 +11,10 @@
     <string name="polish_language">Польська</string>
     <string name="spanish_language">Іспанська</string>
     <string name="turkish_language">Турецька</string>
+
+    <string name="pick_languages">Оберіть принаймні одну мову, яку Ви хочете вивчати.</string>
+    <string name="pick_languages_warning">Для продовження оберіть принаймні одну мову</string>
+    <string name="save">Зберегти</string>
+
+    <string name="general_error">Щось пішло не так. Будь ласка, спробуйте пізніше</string>
 </resources>

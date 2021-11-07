@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "languages")
 data class Language(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Int? = null,
     val code: String
 ) : Parcelable

@@ -14,6 +14,9 @@ interface LanguageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLanguage(language: Language): Completable
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertLanguages(languages: List<Language>): Completable
+
     @Delete
     fun deleteLanguage(language: Language): Completable
 
