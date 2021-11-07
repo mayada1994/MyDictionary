@@ -17,4 +17,9 @@
     <string name="save">Зберегти</string>
 
     <string name="general_error">Щось пішло не так. Будь ласка, спробуйте пізніше</string>
+
+    <string name="dictionary_menu_item">Словник</string>
+    <string name="quiz_menu_item">Тест</string>
+    <string name="languages_menu_item">Мови</string>
+    <string name="statistics_menu_item">Статистика</string>
 </resources>

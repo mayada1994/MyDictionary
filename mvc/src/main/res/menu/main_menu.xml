@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dictionary_menu_item"
+        android:checked="true"
+        android:title="@string/dictionary_menu_item" />
+    <item
+        android:id="@+id/quiz_menu_item"
+        android:title="@string/quiz_menu_item" />
+    <item
+        android:id="@+id/languages_menu_item"
+        android:title="@string/languages_menu_item" />
+    <item
+        android:id="@+id/statistics_menu_item"
+        android:title="@string/statistics_menu_item" />
+</menu>

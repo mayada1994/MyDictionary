@@ -3,4 +3,12 @@
     <style name="ContentLoadingProgress">
         <item name="colorAccent">@color/atomic_tangerine</item>
     </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/menu_text_size</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/menu_text_size</item>
+    </style>
 </resources>
