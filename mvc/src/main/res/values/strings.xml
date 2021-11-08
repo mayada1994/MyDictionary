@@ -22,4 +22,14 @@
     <string name="quiz_menu_item">Тест</string>
     <string name="languages_menu_item">Мови</string>
     <string name="statistics_menu_item">Статистика</string>
+    <string name="words_placeholder_message">Словник пустий. Будь ласка, додейте слова за допомогою хрестика на панелі зверху.</string>
+    <string name="add_new_word_prompt">Додати нове слово</string>
+    <string name="word">Слово</string>
+    <string name="translation">Переклад</string>
+    <string name="cancel">Скасувати</string>
+    <string name="fill_all_fields_prompt">Будь ласка, заповніть всі поля для продовження</string>
+    <string name="word_added_successfully">Слово успішно додано до словника</string>
+    <string name="word_deleted_successfully">Слово успішно видалено зі словника</string>
+    <string name="delete_word_prompt">Видалити обране слово зі словника?</string>
+    <string name="delete">Видалити</string>
 </resources>

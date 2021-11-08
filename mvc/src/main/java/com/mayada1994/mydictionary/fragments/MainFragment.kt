@@ -38,14 +38,14 @@ class MainFragment : Fragment() {
     private fun setMenu() {
         with(binding) {
             navigationView.menu.getItem(selectedMenuItemId)?.isChecked = true
-//            setFragmentWithoutAddingToBackStack(DictionaryFragment())
+            setFragmentWithoutAddingToBackStack(DictionaryFragment())
 
             navigationView.setOnItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.dictionary_menu_item -> {
                         selectedMenuItemId = 0
                         clearFragments()
-//                        setFragmentWithoutAddingToBackStack(DictionaryFragment())
+                        setFragmentWithoutAddingToBackStack(DictionaryFragment())
                     }
                     R.id.quiz_menu_item -> {
                         selectedMenuItemId = 1

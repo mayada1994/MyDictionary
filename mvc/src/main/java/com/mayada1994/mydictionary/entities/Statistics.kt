@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
     tableName = "statistics",
     foreignKeys = [ForeignKey(
         entity = Language::class,
-        parentColumns = arrayOf("id"),
+        parentColumns = arrayOf("code"),
         childColumns = arrayOf("language"),
         onDelete = ForeignKey.CASCADE
     )]
@@ -16,5 +16,5 @@ import androidx.room.PrimaryKey
 data class Statistics(
     @PrimaryKey val id: Int,
     val timestamp: Long,
-    val language: Int
+    val language: String
 )

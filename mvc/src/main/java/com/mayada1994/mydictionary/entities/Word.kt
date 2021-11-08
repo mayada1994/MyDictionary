@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
     tableName = "words",
     foreignKeys = [ForeignKey(
         entity = Language::class,
-        parentColumns = arrayOf("id"),
+        parentColumns = arrayOf("code"),
         childColumns = arrayOf("language"),
         onDelete = ForeignKey.CASCADE
     )]
@@ -16,5 +16,5 @@ import androidx.room.PrimaryKey
 data class Word(
     @PrimaryKey val name: String,
     val translation: String,
-    val language: Int
+    val language: String
 )

@@ -9,7 +9,7 @@ import io.reactivex.Single
 interface StatisticsDao {
 
     @Query("SELECT * FROM statistics WHERE language=:language")
-    fun getStatisticsByLanguage(language: Int): Single<List<Statistics>>
+    fun getStatisticsByLanguage(language: String): Single<List<Statistics>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertStatistics(statistics: Statistics): Completable

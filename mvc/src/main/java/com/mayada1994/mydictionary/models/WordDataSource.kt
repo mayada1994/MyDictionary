@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 class WordDataSource(private val wordDao: WordDao) {
 
-    fun getWordsByLanguage(language: Int): Single<List<Word>> = wordDao.getWordsByLanguage(language)
+    fun getWordsByLanguage(language: String): Single<List<Word>> = wordDao.getWordsByLanguage(language)
 
     fun insertWord(word: Word): Completable = wordDao.insertWord(word)
 

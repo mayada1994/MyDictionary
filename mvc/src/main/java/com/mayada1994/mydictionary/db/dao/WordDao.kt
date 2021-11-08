@@ -9,7 +9,7 @@ import io.reactivex.Single
 interface WordDao {
 
     @Query("SELECT * FROM words WHERE language=:language")
-    fun getWordsByLanguage(language: Int): Single<List<Word>>
+    fun getWordsByLanguage(language: String): Single<List<Word>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWord(word: Word): Completable

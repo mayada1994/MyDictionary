@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 class StatisticsDataSource(private val statisticsDao: StatisticsDao) {
 
-    fun getStatisticsByLanguage(language: Int): Single<List<Statistics>> = statisticsDao.getStatisticsByLanguage(language)
+    fun getStatisticsByLanguage(language: String): Single<List<Statistics>> = statisticsDao.getStatisticsByLanguage(language)
 
     fun insertStatistics(statistics: Statistics): Completable = statisticsDao.insertStatistics(statistics)
 
