@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
                     R.id.quiz_menu_item -> {
                         selectedMenuItemId = 1
                         clearFragments()
-//                        setFragmentWithoutAddingToBackStack(QuizFragment())
+                        setFragmentWithoutAddingToBackStack(QuizFragment())
                     }
                     R.id.languageContainer -> {
                         selectedMenuItemId = 2
@@ -76,13 +76,13 @@ class MainFragment : Fragment() {
         }
         parentFragmentManager.commit {
             addToBackStack(null)
-            replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            replace(R.id.container, fragment, fragment::class.java.simpleName)
         }
     }
 
     private fun setFragmentWithoutAddingToBackStack(fragment: Fragment) {
         parentFragmentManager.commit {
-            replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            replace(R.id.container, fragment, fragment::class.java.simpleName)
         }
     }
 

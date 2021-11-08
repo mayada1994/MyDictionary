@@ -8,7 +8,7 @@ import io.reactivex.Single
 @Dao
 interface WordDao {
 
-    @Query("SELECT * FROM words WHERE language=:language")
+    @Query("SELECT * FROM words WHERE language=:language ORDER BY name")
     fun getWordsByLanguage(language: String): Single<List<Word>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

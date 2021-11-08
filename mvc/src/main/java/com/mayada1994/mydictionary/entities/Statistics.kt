@@ -14,7 +14,8 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Statistics(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val result: String,
     val timestamp: Long,
     val language: String
 )

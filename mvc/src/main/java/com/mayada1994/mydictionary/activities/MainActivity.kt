@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setFragment(fragment: Fragment) {
         supportFragmentManager.commit {
-            replace(R.id.main_container, fragment, fragment.javaClass.simpleName)
+            replace(R.id.main_container, fragment, fragment::class.java.simpleName)
         }
     }
 

@@ -22,7 +22,8 @@
     <string name="quiz_menu_item">Тест</string>
     <string name="languages_menu_item">Мови</string>
     <string name="statistics_menu_item">Статистика</string>
-    <string name="words_placeholder_message">Словник пустий. Будь ласка, додейте слова за допомогою хрестика на панелі зверху.</string>
+    <string name="words_placeholder_message">Словник пустий. Будь ласка, додайте слова за допомогою хрестика на панелі зверху.</string>
+    <string name="quiz_words_placeholder_message">Недостатньо слів. Щоб пройти тест в словнику повинно бути мінімум 4 слова. Будь ласка, додайте слова на сторінці \"Словник\".</string>
     <string name="add_new_word_prompt">Додати нове слово</string>
     <string name="word">Слово</string>
     <string name="translation">Переклад</string>
