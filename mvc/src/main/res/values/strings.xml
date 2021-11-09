@@ -34,4 +34,5 @@
     <string name="delete_word_prompt">Видалити обране слово зі словника?</string>
     <string name="delete">Видалити</string>
     <string name="your_result">Ваш результат</string>
+    <string name="stats_placeholder_message">Статистика пуста. Будь ласка, пройдіть тест для її поповнення.</string>
 </resources>

@@ -60,7 +60,7 @@ class MainFragment : Fragment() {
                     R.id.statistics_menu_item -> {
                         selectedMenuItemId = 3
                         clearFragments()
-//                        setFragmentWithoutAddingToBackStack(StatisticsFragment())
+                        setFragmentWithoutAddingToBackStack(StatisticsFragment())
                     }
                     else -> Timber.e("Unknown menu item")
                 }
