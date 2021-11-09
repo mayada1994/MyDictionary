@@ -33,4 +33,5 @@
     <string name="word_deleted_successfully">Слово успішно видалено зі словника</string>
     <string name="delete_word_prompt">Видалити обране слово зі словника?</string>
     <string name="delete">Видалити</string>
+    <string name="your_result">Ваш результат</string>
 </resources>

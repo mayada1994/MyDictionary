@@ -163,7 +163,13 @@ class QuizFragment : Fragment() {
 
     private fun showResultFragment(result: String) {
         parentFragmentManager.commit {
-//            replace(R.id.container, ResultFragment.newInstance(result), ResultFragment::class.java.simpleName)
+            defaultLanguage?.let {
+                replace(
+                    R.id.container,
+                    ResultFragment.newInstance(result, it),
+                    ResultFragment::class.java.simpleName
+                )
+            }
         }
     }
 
