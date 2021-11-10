@@ -52,10 +52,10 @@ class MainFragment : Fragment() {
                         clearFragments()
                         setFragmentWithoutAddingToBackStack(QuizFragment())
                     }
-                    R.id.languageContainer -> {
+                    R.id.languages_menu_item -> {
                         selectedMenuItemId = 2
                         clearFragments()
-//                        setFragmentWithoutAddingToBackStack(LanguagesFragment())
+                        setFragmentWithoutAddingToBackStack(DefaultLanguageFragment())
                     }
                     R.id.statistics_menu_item -> {
                         selectedMenuItemId = 3
