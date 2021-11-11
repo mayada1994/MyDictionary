@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Dictionary MVC</string>
+    <string name="app_name">My Dictionary MVP</string>
     <string name="arabic_language">Арабська</string>
     <string name="chinese_language">Китайська</string>
     <string name="english_language">Англійська</string>
