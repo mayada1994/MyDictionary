@@ -7,11 +7,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.mayada1994.mydictionary_mvp.R
+import com.mayada1994.mydictionary_mvp.contracts.MainContract
 import com.mayada1994.mydictionary_mvp.databinding.ActivityMainBinding
+import com.mayada1994.mydictionary_mvp.presenters.MainPresenter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val presenter = MainPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,20 +24,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setInitialScreen()
+        presenter.init()
     }
 
-    private fun setInitialScreen() {
-//        if (DictionaryComponent.cacheUtils.defaultLanguage.isNullOrBlank()) {
-//            setFragment(AddLanguagesFragment.newInstance(null))
-//        } else {
-//            setFragment(MainFragment())
-//        }
-    }
-
-    fun setFragment(fragment: Fragment) {
+    override fun setFragment(fragmentClass: Class<out Fragment>) {
         supportFragmentManager.commit {
-            replace(R.id.main_container, fragment, fragment::class.java.simpleName)
+            replace(R.id.main_container, fragmentClass.newInstance(), fragmentClass.simpleName)
         }
     }
 

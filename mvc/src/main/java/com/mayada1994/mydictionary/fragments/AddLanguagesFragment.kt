@@ -82,7 +82,7 @@ class AddLanguagesFragment : Fragment() {
                     override fun onComplete() {
                         if (initialScreen) {
                             DictionaryComponent.cacheUtils.defaultLanguage = languages[0].locale
-                            (requireActivity() as MainActivity).setFragment(MainFragment())
+                            (requireActivity() as MainActivity).setFragment(MainFragment::class.java)
                         } else {
                             activity?.onBackPressed()
                         }
