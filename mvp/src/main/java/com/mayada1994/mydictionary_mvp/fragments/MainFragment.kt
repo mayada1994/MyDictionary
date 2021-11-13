@@ -43,7 +43,7 @@ class MainFragment : Fragment(), MainMenuContract.ViewInterface {
     private fun setMenu() {
         with(binding) {
             navigationView.menu.getItem(selectedMenuItemId)?.isChecked = true
-//            setFragmentWithoutAddingToBackStack(DictionaryFragment())
+            setFragmentWithoutAddingToBackStack(DictionaryFragment())
 
             navigationView.setOnItemSelectedListener { menuItem ->
                 presenter.onMenuItemSelected(menuItem.itemId)
