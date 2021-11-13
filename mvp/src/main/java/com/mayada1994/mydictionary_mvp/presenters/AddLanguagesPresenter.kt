@@ -5,6 +5,7 @@ import com.mayada1994.mydictionary_mvp.contracts.AddLanguagesContract
 import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Language
 import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
+import com.mayada1994.mydictionary_mvp.fragments.MainFragment
 import com.mayada1994.mydictionary_mvp.models.LanguageDataSource
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -56,7 +57,7 @@ class AddLanguagesPresenter(
                     override fun onComplete() {
                         if (initialScreen) {
                             DictionaryComponent.cacheUtils.defaultLanguage = languages[0].locale
-//                           viewInterface.setFragment(MainFragment::class.java)
+                            viewInterface.setFragment(MainFragment::class.java)
                         } else {
                             viewInterface.onBackPressed()
                         }
