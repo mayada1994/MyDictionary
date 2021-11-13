@@ -1,5 +1,6 @@
 package com.mayada1994.mydictionary_mvp.presenters
 
+import com.mayada1994.mydictionary_mvp.fragments.StatisticsFragment
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.MainMenuContract
 import com.mayada1994.mydictionary_mvp.fragments.DictionaryFragment
@@ -24,10 +25,10 @@ class MainMenuPresenter(
 //                DefaultLanguageFragment::class.java,
 //                selectedMenuItemId = 2
 //            )
-//            R.id.statistics_menu_item -> viewInterface.showSelectedScreen(
-//                StatisticsFragment::class.java,
-//                selectedMenuItemId = 3
-//            )
+            R.id.statistics_menu_item -> viewInterface.showSelectedScreen(
+                StatisticsFragment::class.java,
+                selectedMenuItemId = 3
+            )
             else -> Timber.e("Unknown menu item")
         }
     }
