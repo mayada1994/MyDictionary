@@ -118,14 +118,12 @@ class DefaultLanguageFragment : Fragment() {
 
     private fun goToAddLanguagesFragment() {
         parentFragmentManager.commit {
-            defaultLanguage?.let {
-                replace(
-                    R.id.container,
-                    AddLanguagesFragment.newInstance(currentLanguages),
-                    AddLanguagesFragment::class.java.simpleName
-                )
-                addToBackStack(null)
-            }
+            replace(
+                R.id.container,
+                AddLanguagesFragment.newInstance(currentLanguages),
+                AddLanguagesFragment::class.java.simpleName
+            )
+            addToBackStack(null)
         }
     }
 
