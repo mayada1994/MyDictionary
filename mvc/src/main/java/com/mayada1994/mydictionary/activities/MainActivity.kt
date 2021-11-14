@@ -28,15 +28,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setInitialScreen() {
         if (DictionaryComponent.cacheUtils.defaultLanguage.isNullOrBlank()) {
-            setFragment(AddLanguagesFragment.newInstance(null))
+            setFragment(AddLanguagesFragment::class.java)
         } else {
-            setFragment(MainFragment())
+            setFragment(MainFragment::class.java)
         }
     }
 
-    fun setFragment(fragment: Fragment) {
+    fun setFragment(fragmentClass: Class<out Fragment>) {
         supportFragmentManager.commit {
-            replace(R.id.main_container, fragment, fragment::class.java.simpleName)
+            replace(R.id.main_container, fragmentClass.newInstance(), fragmentClass.simpleName)
         }
     }
 
