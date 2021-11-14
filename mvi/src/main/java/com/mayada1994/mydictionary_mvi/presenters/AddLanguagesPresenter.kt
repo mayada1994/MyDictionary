@@ -51,6 +51,7 @@ class AddLanguagesPresenter(private val addLanguagesInteractor: AddLanguagesInte
 
     private fun observeSelectLanguagesIntent() = view.selectLanguagesIntent()
         .doOnNext {
+            Timber.d("Intent: onLanguagesSelected")
             this.selectedLanguages.clear()
             this.selectedLanguages.addAll(it)
         }

@@ -6,13 +6,19 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.R
 import com.mayada1994.mydictionary_mvi.databinding.ActivityMainBinding
+import com.mayada1994.mydictionary_mvi.interactors.MainInteractor
+import com.mayada1994.mydictionary_mvi.presenters.MainPresenter
+import com.mayada1994.mydictionary_mvi.states.MainState
+import com.mayada1994.mydictionary_mvi.views.MainView
+import io.reactivex.Observable
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +27,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setInitialScreen()
+        presenter = MainPresenter(MainInteractor())
+        presenter.bind(this)
     }
 
-    private fun setInitialScreen() {
-        if (DictionaryComponent.cacheUtils.defaultLanguage.isNullOrBlank()) {
-//            setFragment(AddLanguagesFragment::class.java)
-        } else {
-//            setFragment(MainFragment::class.java)
+    override fun render(state: MainState) {
+        when (state) {
+            is MainState.ScreenState -> setFragment(state.fragmentClass)
         }
     }
+
+    override fun displayInitialScreenIntent(): Observable<Unit> = Observable.just(Unit)
 
     fun setFragment(fragmentClass: Class<out Fragment>) {
         supportFragmentManager.commit {
@@ -40,6 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     fun showProgress(visible: Boolean) {
         binding.progressBar.isVisible = visible
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.unbind()
     }
 
 }
