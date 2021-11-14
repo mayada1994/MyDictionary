@@ -1,4 +1,4 @@
-package com.mayada1994.mydictionary.models
+package com.mayada1994.mydictionary_mvi.repositories
 
 import com.mayada1994.mydictionary_mvi.db.dao.StatisticsDao
 import com.mayada1994.mydictionary_mvi.entities.Statistics

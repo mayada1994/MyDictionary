@@ -3,13 +3,13 @@ package com.mayada1994.mydictionary_mvi.di
 import android.app.Application
 import androidx.preference.PreferenceManager
 import androidx.room.Room
-import com.mayada1994.mydictionary.models.LanguageRepository
-import com.mayada1994.mydictionary.models.StatisticsRepository
-import com.mayada1994.mydictionary.models.WordRepository
 import com.mayada1994.mydictionary_mvi.db.DictionaryDatabase
 import com.mayada1994.mydictionary_mvi.db.dao.LanguageDao
 import com.mayada1994.mydictionary_mvi.db.dao.StatisticsDao
 import com.mayada1994.mydictionary_mvi.db.dao.WordDao
+import com.mayada1994.mydictionary_mvi.repositories.LanguageRepository
+import com.mayada1994.mydictionary_mvi.repositories.StatisticsRepository
+import com.mayada1994.mydictionary_mvi.repositories.WordRepository
 import com.mayada1994.mydictionary_mvi.utils.CacheUtils
 
 object DictionaryComponent {
