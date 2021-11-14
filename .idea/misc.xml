@@ -30,6 +30,7 @@
         <entry key="mvc/src/main/res/layout/item_word.xml" value="0.20104166666666667" />
         <entry key="mvc/src/main/res/layout/layout_toolbar.xml" value="0.20104166666666667" />
         <entry key="mvc/src/main/res/menu/main_menu.xml" value="0.20104166666666667" />
+        <entry key="mvi/src/main/res/layout/activity_main.xml" value="0.18229166666666666" />
         <entry key="mvp/src/main/res/layout/activity_main.xml" value="0.1859375" />
         <entry key="mvp/src/main/res/layout/dialog_add_new_word.xml" value="0.20104166666666667" />
         <entry key="mvp/src/main/res/layout/fragment_dictionary.xml" value="0.19739583333333333" />
