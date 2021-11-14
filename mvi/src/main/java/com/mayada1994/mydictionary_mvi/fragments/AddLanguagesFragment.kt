@@ -30,8 +30,6 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
 
     private val languagesSubject: PublishSubject<List<Language>> = PublishSubject.create()
 
-    private val saveButtonSubject: PublishSubject<Unit> = PublishSubject.create()
-
     private val selectedLanguagesSubject: PublishSubject<List<LanguageInfo>> = PublishSubject.create()
 
     override fun onCreateView(
@@ -45,16 +43,10 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
-
         languagesSubject.onNext(arguments?.getParcelableArrayList(LANGUAGES) ?: emptyList())
 
         presenter = AddLanguagesPresenter(AddLanguagesInteractor(DictionaryComponent.languageRepository))
         presenter.bind(this)
-    }
-
-    private fun setListeners() {
-        binding.btnSave.setOnClickListener { saveButtonSubject.onNext(Unit) }
     }
 
     override fun render(state: AddLanguagesState) {
@@ -73,7 +65,11 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
 
     override fun displayLanguagesIntent(): Observable<List<Language>> = languagesSubject
 
-    override fun saveButtonClickIntent(): Observable<Unit> = saveButtonSubject
+    override fun saveButtonClickIntent(): Observable<Unit> {
+        return Observable.create { emitter ->
+            binding.btnSave.setOnClickListener { emitter.onNext(Unit) }
+        }
+    }
 
     override fun selectLanguagesIntent(): Observable<List<LanguageInfo>> = selectedLanguagesSubject
 
