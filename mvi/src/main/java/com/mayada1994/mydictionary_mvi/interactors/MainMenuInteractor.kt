@@ -1,6 +1,7 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
+import com.mayada1994.mydictionary_mvi.fragments.DefaultLanguageFragment
 import com.mayada1994.mydictionary_mvi.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvi.fragments.QuizFragment
 import com.mayada1994.mydictionary_mvi.fragments.StatisticsFragment
@@ -21,12 +22,12 @@ class MainMenuInteractor {
                     QuizFragment::class.java,
                     selectedMenuItemId = 1
                 )
-//
-//                R.id.languages_menu_item -> MainMenuState.ScreenState(
-//                    DefaultLanguageFragment::class.java,
-//                    selectedMenuItemId = 2
-//                )
-//
+
+                R.id.languages_menu_item -> MainMenuState.ScreenState(
+                    DefaultLanguageFragment::class.java,
+                    selectedMenuItemId = 2
+                )
+
                 R.id.statistics_menu_item -> MainMenuState.ScreenState(
                     StatisticsFragment::class.java,
                     selectedMenuItemId = 3
