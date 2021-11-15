@@ -1,6 +1,7 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
+import com.mayada1994.mydictionary_mvi.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvi.states.MainMenuState
 import io.reactivex.Observable
 
@@ -9,10 +10,10 @@ class MainMenuInteractor {
     fun getSelectedMenuItem(itemId: Int): Observable<MainMenuState> {
         return Observable.just(
             when (itemId) {
-//                R.id.dictionary_menu_item -> MainMenuState.ScreenState(
-//                    DictionaryFragment::class.java,
-//                    selectedMenuItemId = 0
-//                )
+                R.id.dictionary_menu_item -> MainMenuState.ScreenState(
+                    DictionaryFragment::class.java,
+                    selectedMenuItemId = 0
+                )
 //
 //                R.id.quiz_menu_item -> MainMenuState.ScreenState(
 //                    QuizFragment::class.java,

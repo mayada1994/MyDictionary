@@ -48,7 +48,7 @@ class MainFragment : Fragment(), MainMenuView {
 
     private fun setMenu() {
         binding.navigationView.menu.getItem(selectedMenuItemId)?.isChecked = true
-//        setFragmentWithoutAddingToBackStack(DictionaryFragment())
+        setFragmentWithoutAddingToBackStack(DictionaryFragment())
     }
 
     override fun render(state: MainMenuState) {

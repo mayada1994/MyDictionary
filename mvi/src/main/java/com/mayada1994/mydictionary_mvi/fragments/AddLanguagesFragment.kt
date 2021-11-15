@@ -28,8 +28,6 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
 
     private lateinit var presenter: AddLanguagesPresenter
 
-    private val languagesSubject: PublishSubject<List<Language>> = PublishSubject.create()
-
     private val selectedLanguagesSubject: PublishSubject<List<LanguageInfo>> = PublishSubject.create()
 
     override fun onCreateView(
@@ -42,8 +40,6 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        languagesSubject.onNext(arguments?.getParcelableArrayList(LANGUAGES) ?: emptyList())
 
         presenter = AddLanguagesPresenter(AddLanguagesInteractor(DictionaryComponent.languageRepository))
         presenter.bind(this)
@@ -63,17 +59,21 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
         }
     }
 
-    override fun displayLanguagesIntent(): Observable<List<Language>> = languagesSubject
+    override fun displayLanguagesIntent(): Observable<List<Language>> = Observable.just(arguments?.getParcelableArrayList(LANGUAGES) ?: emptyList())
 
     override fun saveButtonClickIntent(): Observable<Unit> {
         return Observable.create { emitter ->
-            binding.btnSave.setOnClickListener { emitter.onNext(Unit) }
+            binding.btnSave.setOnClickListener {
+                emitter.onNext(Unit)
+            }
         }
     }
 
     override fun selectLanguagesIntent(): Observable<List<LanguageInfo>> = selectedLanguagesSubject
 
     private fun renderDataState(languages: List<LanguageItem>) {
+        showProgress(false)
+
         binding.languagesRecyclerView.adapter = LanguagesAdapter(
             languages,
             object : LanguagesAdapter.OnLanguageItemClickListener {

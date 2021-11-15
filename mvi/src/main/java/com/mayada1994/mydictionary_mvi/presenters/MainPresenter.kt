@@ -24,7 +24,7 @@ class MainPresenter(private val mainInteractor: MainInteractor) {
     }
 
     private fun observeDisplayInitialScreenIntent() = view.displayInitialScreenIntent()
-        .doOnNext { Timber.d("Intent: onSaveButtonClick") }
+        .doOnNext { Timber.d("Intent: display initial screen") }
         .flatMap { mainInteractor.getInitialScreen() }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

@@ -34,17 +34,20 @@ class AddLanguagesPresenter(private val addLanguagesInteractor: AddLanguagesInte
         .doOnNext {
             Timber.d("Intent: display languages")
             initialScreen = it.isEmpty()
+            AddLanguagesState.LoadingState
         }
         .flatMap { addLanguagesInteractor.getLanguages(it) }
-        .startWith(AddLanguagesState.LoadingState)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { view.render(it) }
 
     private fun observeSaveButtonClickIntent() = view.saveButtonClickIntent()
-        .doOnNext { Timber.d("Intent: onSaveButtonClick") }
+        .doOnNext {
+            Timber.d("Intent: onSaveButtonClick")
+            AddLanguagesState.LoadingState
+        }
+        .observeOn(Schedulers.io())
         .flatMap { addLanguagesInteractor.onSaveButtonClick(selectedLanguages, initialScreen) }
-        .startWith(AddLanguagesState.LoadingState)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { view.render(it) }
