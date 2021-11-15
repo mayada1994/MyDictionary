@@ -2,6 +2,7 @@ package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
 import com.mayada1994.mydictionary_mvi.fragments.DictionaryFragment
+import com.mayada1994.mydictionary_mvi.fragments.QuizFragment
 import com.mayada1994.mydictionary_mvi.states.MainMenuState
 import io.reactivex.Observable
 
@@ -14,11 +15,11 @@ class MainMenuInteractor {
                     DictionaryFragment::class.java,
                     selectedMenuItemId = 0
                 )
-//
-//                R.id.quiz_menu_item -> MainMenuState.ScreenState(
-//                    QuizFragment::class.java,
-//                    selectedMenuItemId = 1
-//                )
+
+                R.id.quiz_menu_item -> MainMenuState.ScreenState(
+                    QuizFragment::class.java,
+                    selectedMenuItemId = 1
+                )
 //
 //                R.id.languages_menu_item -> MainMenuState.ScreenState(
 //                    DefaultLanguageFragment::class.java,
