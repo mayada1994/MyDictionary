@@ -3,6 +3,7 @@ package com.mayada1994.mydictionary_mvi.interactors
 import com.mayada1994.mydictionary_mvi.R
 import com.mayada1994.mydictionary_mvi.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvi.fragments.QuizFragment
+import com.mayada1994.mydictionary_mvi.fragments.StatisticsFragment
 import com.mayada1994.mydictionary_mvi.states.MainMenuState
 import io.reactivex.Observable
 
@@ -26,10 +27,10 @@ class MainMenuInteractor {
 //                    selectedMenuItemId = 2
 //                )
 //
-//                R.id.statistics_menu_item -> MainMenuState.ScreenState(
-//                    StatisticsFragment::class.java,
-//                    selectedMenuItemId = 3
-//                )
+                R.id.statistics_menu_item -> MainMenuState.ScreenState(
+                    StatisticsFragment::class.java,
+                    selectedMenuItemId = 3
+                )
 
                 else -> MainMenuState.ErrorState(R.string.general_error)
             }
