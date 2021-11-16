@@ -9,4 +9,5 @@ dependencyResolutionManagement {
 rootProject.name = "My Dictionary"
 include ':mvc'
 include ':mvp'
+include ':mvvm'
 include ':mvi'
