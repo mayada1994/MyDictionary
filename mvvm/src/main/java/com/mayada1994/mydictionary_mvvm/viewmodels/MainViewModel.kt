@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.di.DictionaryComponent
+import com.mayada1994.mydictionary_mvvm.fragments.MainFragment
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 
 class MainViewModel : ViewModel() {
@@ -16,7 +17,7 @@ class MainViewModel : ViewModel() {
         if (DictionaryComponent.cacheUtils.defaultLanguage.isNullOrBlank()) {
 //            _selectedScreen.postValue(AddLanguagesFragment::class.java)
         } else {
-//            _selectedScreen.postValue(MainFragment::class.java)
+            _selectedScreen.postValue(MainFragment::class.java)
         }
     }
 
