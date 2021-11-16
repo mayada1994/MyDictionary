@@ -16,9 +16,9 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when {
         modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel() as T
         modelClass.isAssignableFrom(MainMenuViewModel::class.java) -> MainMenuViewModel() as T
-//        modelClass.isAssignableFrom(AddLanguagesViewModel::class.java) -> AddLanguagesViewModel(
-//            languageRepository
-//        ) as T
+        modelClass.isAssignableFrom(AddLanguagesViewModel::class.java) -> AddLanguagesViewModel(
+            languageRepository
+        ) as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }
 
