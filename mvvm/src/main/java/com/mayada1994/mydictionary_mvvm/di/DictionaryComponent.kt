@@ -3,14 +3,15 @@ package com.mayada1994.mydictionary_mvvm.di
 import android.app.Application
 import androidx.preference.PreferenceManager
 import androidx.room.Room
-import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
-import com.mayada1994.mydictionary_mvvm.repositories.StatisticsRepository
-import com.mayada1994.mydictionary_mvvm.repositories.WordRepository
-import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 import com.mayada1994.mydictionary_mvvm.db.DictionaryDatabase
 import com.mayada1994.mydictionary_mvvm.db.dao.LanguageDao
 import com.mayada1994.mydictionary_mvvm.db.dao.StatisticsDao
 import com.mayada1994.mydictionary_mvvm.db.dao.WordDao
+import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
+import com.mayada1994.mydictionary_mvvm.repositories.StatisticsRepository
+import com.mayada1994.mydictionary_mvvm.repositories.WordRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
+import com.mayada1994.mydictionary_mvvm.viewmodels.ViewModelFactory
 
 object DictionaryComponent {
 
@@ -29,11 +30,13 @@ object DictionaryComponent {
 
     private val wordDao: WordDao by lazy { database.wordDao() }
 
-    val languageRepository: LanguageRepository by lazy { LanguageRepository(languageDao) }
+    private val languageRepository: LanguageRepository by lazy { LanguageRepository(languageDao) }
 
-    val statisticsRepository: StatisticsRepository by lazy { StatisticsRepository(statisticsDao) }
+    private val statisticsRepository: StatisticsRepository by lazy { StatisticsRepository(statisticsDao) }
 
-    val wordRepository: WordRepository by lazy { WordRepository(wordDao) }
+    private val wordRepository: WordRepository by lazy { WordRepository(wordDao) }
+
+    val viewModelFactory: ViewModelFactory by lazy { ViewModelFactory(languageRepository, statisticsRepository, wordRepository) }
 
     val cacheUtils: CacheUtils by lazy {
         CacheUtils(
