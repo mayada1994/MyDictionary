@@ -19,6 +19,9 @@ class ViewModelFactory(
         modelClass.isAssignableFrom(AddLanguagesViewModel::class.java) -> AddLanguagesViewModel(
             languageRepository
         ) as T
+        modelClass.isAssignableFrom(DictionaryViewModel::class.java) -> DictionaryViewModel(
+            wordRepository
+        ) as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }
 

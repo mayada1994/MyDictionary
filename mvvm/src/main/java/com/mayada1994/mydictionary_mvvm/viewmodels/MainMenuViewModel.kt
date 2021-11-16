@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
 import com.mayada1994.mydictionary_mvvm.entities.SelectedScreen
+import com.mayada1994.mydictionary_mvvm.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 
 class MainMenuViewModel : ViewModel() {
@@ -18,11 +19,11 @@ class MainMenuViewModel : ViewModel() {
 
     fun onMenuItemSelected(itemId: Int) {
         when (itemId) {
-//            R.id.dictionary_menu_item -> SelectedScreen(
-//                DictionaryFragment::class.java,
-//                selectedMenuItemId = 0
-//            )
-//
+            R.id.dictionary_menu_item -> SelectedScreen(
+                DictionaryFragment::class.java,
+                selectedMenuItemId = 0
+            )
+
 //            R.id.quiz_menu_item -> SelectedScreen(
 //                QuizFragment::class.java,
 //                selectedMenuItemId = 1
