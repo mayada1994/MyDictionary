@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import com.mayada1994.mydictionary_mvvm.R
 import com.mayada1994.mydictionary_mvvm.activities.MainActivity
 import com.mayada1994.mydictionary_mvvm.adapters.QuizAdapter
 import com.mayada1994.mydictionary_mvvm.databinding.FragmentQuizBinding
@@ -82,13 +84,13 @@ class QuizFragment : Fragment() {
     }
 
     private fun showResultFragment(result: String) {
-//        parentFragmentManager.commit {
-//                replace(
-//                    R.id.container,
-//                    ResultFragment.newInstance(result),
-//                    ResultFragment::class.java.simpleName
-//                )
-//        }
+        parentFragmentManager.commit {
+                replace(
+                    R.id.container,
+                    ResultFragment.newInstance(result),
+                    ResultFragment::class.java.simpleName
+                )
+        }
     }
 
     private fun showProgress(isVisible: Boolean) {

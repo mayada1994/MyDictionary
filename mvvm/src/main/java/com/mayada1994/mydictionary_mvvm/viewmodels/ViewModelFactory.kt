@@ -26,6 +26,7 @@ class ViewModelFactory(
             wordRepository,
             statisticsRepository
         ) as T
+        modelClass.isAssignableFrom(ResultViewModel::class.java) -> ResultViewModel() as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }
 
