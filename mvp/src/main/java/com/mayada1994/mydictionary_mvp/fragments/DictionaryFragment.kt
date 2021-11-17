@@ -45,10 +45,10 @@ class DictionaryFragment : Fragment(), DictionaryContract.ViewInterface {
         presenter = DictionaryPresenter(this, DictionaryComponent.wordDataSource)
         presenter.init()
 
-        setListeners()
+        initListeners()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnAdd.setOnClickListener { presenter.onAddButtonClick() }
     }
 

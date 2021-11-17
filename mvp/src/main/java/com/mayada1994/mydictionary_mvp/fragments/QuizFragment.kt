@@ -38,10 +38,10 @@ class QuizFragment : Fragment(), QuizContract.ViewInterface {
         presenter = QuizPresenter(this, DictionaryComponent.wordDataSource, DictionaryComponent.statisticsDataSource)
         presenter.init()
 
-        setListeners()
+        initListeners()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnResult.setOnClickListener { presenter.getResult((binding.questionsRecyclerView.adapter as QuizAdapter?)?.getItems()) }
     }
 

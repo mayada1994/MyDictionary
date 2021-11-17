@@ -62,11 +62,11 @@ class DictionaryFragment : Fragment() {
 
         wordDataSource = DictionaryComponent.wordDataSource
 
-        setListeners()
+        initListeners()
         setToolbar()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnAdd.setOnClickListener { showAddNewWordDialog() }
     }
 

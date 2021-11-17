@@ -57,11 +57,11 @@ class AddLanguagesFragment : Fragment() {
 
         languageDataSource = DictionaryComponent.languageDataSource
 
-        setListeners()
+        initListeners()
         setLanguages()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnSave.setOnClickListener {
             if (selectedLanguages.isNullOrEmpty()) {
                 showToast(R.string.pick_languages_warning)

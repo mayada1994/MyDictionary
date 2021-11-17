@@ -59,11 +59,11 @@ class QuizFragment : Fragment() {
 
         statisticsDataSource = DictionaryComponent.statisticsDataSource
 
-        setListeners()
+        initListeners()
         setToolbar()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnResult.setOnClickListener { getResult() }
     }
 

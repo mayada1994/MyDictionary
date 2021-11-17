@@ -38,7 +38,7 @@ class DefaultLanguageFragment : Fragment(), DefaultLanguageContract.ViewInterfac
 
         presenter = DefaultLanguagePresenter(this, DictionaryComponent.languageDataSource)
 
-        setListeners()
+        initListeners()
     }
 
     override fun onResume() {
@@ -47,7 +47,7 @@ class DefaultLanguageFragment : Fragment(), DefaultLanguageContract.ViewInterfac
         presenter.init()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnAdd.setOnClickListener { presenter.onAddButtonClick() }
     }
 
