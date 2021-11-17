@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
 import com.mayada1994.mydictionary_mvvm.entities.SelectedScreen
 import com.mayada1994.mydictionary_mvvm.fragments.DictionaryFragment
+import com.mayada1994.mydictionary_mvvm.fragments.QuizFragment
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 
 class MainMenuViewModel : ViewModel() {
@@ -24,11 +25,11 @@ class MainMenuViewModel : ViewModel() {
                 selectedMenuItemId = 0
             )
 
-//            R.id.quiz_menu_item -> SelectedScreen(
-//                QuizFragment::class.java,
-//                selectedMenuItemId = 1
-//            )
-//
+            R.id.quiz_menu_item -> SelectedScreen(
+                QuizFragment::class.java,
+                selectedMenuItemId = 1
+            )
+
 //            R.id.languages_menu_item -> SelectedScreen(
 //                DefaultLanguageFragment::class.java,
 //                selectedMenuItemId = 2

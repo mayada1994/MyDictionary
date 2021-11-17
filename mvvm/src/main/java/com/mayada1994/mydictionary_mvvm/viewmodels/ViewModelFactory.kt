@@ -22,6 +22,10 @@ class ViewModelFactory(
         modelClass.isAssignableFrom(DictionaryViewModel::class.java) -> DictionaryViewModel(
             wordRepository
         ) as T
+        modelClass.isAssignableFrom(QuizViewModel::class.java) -> QuizViewModel(
+            wordRepository,
+            statisticsRepository
+        ) as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }
 
