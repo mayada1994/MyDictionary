@@ -6,6 +6,7 @@ import com.mayada1994.mydictionary_mvvm.R
 import com.mayada1994.mydictionary_mvvm.entities.SelectedScreen
 import com.mayada1994.mydictionary_mvvm.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvvm.fragments.QuizFragment
+import com.mayada1994.mydictionary_mvvm.fragments.StatisticsFragment
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 
 class MainMenuViewModel : ViewModel() {
@@ -34,11 +35,11 @@ class MainMenuViewModel : ViewModel() {
 //                DefaultLanguageFragment::class.java,
 //                selectedMenuItemId = 2
 //            )
-//
-//            R.id.statistics_menu_item -> SelectedScreen(
-//                StatisticsFragment::class.java,
-//                selectedMenuItemId = 3
-//            )
+
+            R.id.statistics_menu_item -> SelectedScreen(
+                StatisticsFragment::class.java,
+                selectedMenuItemId = 3
+            )
 
             else -> _toastMessageStringResId.postValue(R.string.general_error)
         }
