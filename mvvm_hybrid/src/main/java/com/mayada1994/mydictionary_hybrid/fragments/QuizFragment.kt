@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.activities.MainActivity
 import com.mayada1994.mydictionary_hybrid.adapters.QuizAdapter
 import com.mayada1994.mydictionary_hybrid.databinding.FragmentQuizBinding
@@ -78,11 +79,11 @@ class QuizFragment : Fragment() {
 
     private fun showResultFragment(result: String) {
         parentFragmentManager.commit {
-//                replace(
-//                    R.id.container,
-//                    ResultFragment.newInstance(result),
-//                    ResultFragment::class.java.simpleName
-//                )
+                replace(
+                    R.id.container,
+                    ResultFragment.newInstance(result),
+                    ResultFragment::class.java.simpleName
+                )
         }
     }
 
