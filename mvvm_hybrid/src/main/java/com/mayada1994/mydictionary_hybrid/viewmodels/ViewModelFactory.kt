@@ -27,9 +27,9 @@ class ViewModelFactory(
             wordRepository,
             statisticsRepository
         ) as T
-//        modelClass.isAssignableFrom(StatisticsViewModel::class.java) -> StatisticsViewModel(
-//            statisticsRepository
-//        ) as T
+        modelClass.isAssignableFrom(StatisticsViewModel::class.java) -> StatisticsViewModel(
+            statisticsRepository
+        ) as T
 //        modelClass.isAssignableFrom(DefaultLanguageViewModel::class.java) -> DefaultLanguageViewModel(
 //            languageRepository
 //        ) as T
