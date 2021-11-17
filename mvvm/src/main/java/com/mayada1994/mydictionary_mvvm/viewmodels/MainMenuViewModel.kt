@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
 import com.mayada1994.mydictionary_mvvm.entities.SelectedScreen
+import com.mayada1994.mydictionary_mvvm.fragments.DefaultLanguageFragment
 import com.mayada1994.mydictionary_mvvm.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_mvvm.fragments.QuizFragment
 import com.mayada1994.mydictionary_mvvm.fragments.StatisticsFragment
@@ -31,10 +32,10 @@ class MainMenuViewModel : ViewModel() {
                 selectedMenuItemId = 1
             )
 
-//            R.id.languages_menu_item -> SelectedScreen(
-//                DefaultLanguageFragment::class.java,
-//                selectedMenuItemId = 2
-//            )
+            R.id.languages_menu_item -> SelectedScreen(
+                DefaultLanguageFragment::class.java,
+                selectedMenuItemId = 2
+            )
 
             R.id.statistics_menu_item -> SelectedScreen(
                 StatisticsFragment::class.java,
