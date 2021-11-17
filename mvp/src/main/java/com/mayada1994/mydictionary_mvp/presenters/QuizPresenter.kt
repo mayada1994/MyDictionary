@@ -53,14 +53,17 @@ class QuizPresenter(
                     override fun onSuccess(words: List<Word>) {
                         if (words.size >= MIN_WORD_AMOUNT) {
                             viewInterface.showPlaceholder(false)
+                            viewInterface.changeResultButtonVisibility(true)
                             generateQuestions(words)
                         } else {
                             viewInterface.showPlaceholder(true)
+                            viewInterface.changeResultButtonVisibility(false)
                         }
                     }
 
                     override fun onError(e: Throwable) {
                         viewInterface.showPlaceholder(true)
+                        viewInterface.changeResultButtonVisibility(false)
                         viewInterface.showMessage(R.string.general_error)
                     }
                 })

@@ -78,6 +78,10 @@ class QuizFragment : Fragment(), QuizContract.ViewInterface {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
+    override fun changeResultButtonVisibility(isVisible: Boolean) {
+        binding.btnResult.isVisible = isVisible
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()

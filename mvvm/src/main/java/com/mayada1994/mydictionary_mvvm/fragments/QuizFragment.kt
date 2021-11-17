@@ -59,6 +59,10 @@ class QuizFragment : Fragment() {
             showResultFragment(result)
         })
 
+        viewModel.isResultButtonVisible.observe(viewLifecycleOwner, { isVisible ->
+            changeResultButtonVisibility(isVisible)
+        })
+
         viewModel.isProgressVisible.observe(viewLifecycleOwner, { isVisible ->
             showProgress(isVisible)
         })
@@ -103,6 +107,10 @@ class QuizFragment : Fragment() {
 
     private fun showMessage(resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun changeResultButtonVisibility(isVisible: Boolean) {
+        binding.btnResult.isVisible = isVisible
     }
 
     override fun onDestroy() {

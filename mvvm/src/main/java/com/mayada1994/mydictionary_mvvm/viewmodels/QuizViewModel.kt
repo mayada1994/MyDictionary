@@ -38,6 +38,10 @@ class QuizViewModel(
     val result: LiveData<String>
         get() = _result
 
+    private val _isResultButtonVisible = SingleLiveEvent<Boolean>()
+    val isResultButtonVisible: LiveData<Boolean>
+        get() = _isResultButtonVisible
+
     private val _isProgressVisible = SingleLiveEvent<Boolean>()
     val isProgressVisible: LiveData<Boolean>
         get() = _isProgressVisible
@@ -76,14 +80,17 @@ class QuizViewModel(
                     override fun onSuccess(words: List<Word>) {
                         if (words.size >= MIN_WORD_AMOUNT) {
                             _isPlaceholderVisible.postValue(false)
+                            _isResultButtonVisible.postValue(true)
                             generateQuestions(words)
                         } else {
                             _isPlaceholderVisible.postValue(true)
+                            _isResultButtonVisible.postValue(false)
                         }
                     }
 
                     override fun onError(e: Throwable) {
                         _isPlaceholderVisible.postValue(true)
+                        _isResultButtonVisible.postValue(false)
                         _toastMessageStringResId.postValue(R.string.general_error)
                     }
                 })

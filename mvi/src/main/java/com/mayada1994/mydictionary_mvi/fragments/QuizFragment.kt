@@ -74,6 +74,7 @@ class QuizFragment : Fragment(), QuizView {
     private fun renderDataState(defaultLanguage: LanguageInfo, questions: List<QuestionItem>) {
         showPlaceholder(false)
         showProgress(false)
+        changeResultButtonVisibility(true)
 
         setToolbar(defaultLanguage)
         setQuestions(questions)
@@ -86,18 +87,21 @@ class QuizFragment : Fragment(), QuizView {
     private fun renderEmptyState(defaultLanguage: LanguageInfo) {
         showProgress(false)
         showPlaceholder(true)
+        changeResultButtonVisibility(false)
         setToolbar(defaultLanguage)
     }
 
     private fun renderCompletedState(resId: Int) {
         showProgress(false)
         showPlaceholder(false)
+        changeResultButtonVisibility(true)
         showToast(resId)
     }
 
     private fun renderErrorState(resId: Int) {
         showProgress(false)
         showPlaceholder(true)
+        changeResultButtonVisibility(false)
         showToast(resId)
     }
 
@@ -132,6 +136,10 @@ class QuizFragment : Fragment(), QuizView {
 
     private fun showToast(resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun changeResultButtonVisibility(isVisible: Boolean) {
+        binding.btnResult.isVisible = isVisible
     }
 
     override fun onStop() {

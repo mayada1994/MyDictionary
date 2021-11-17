@@ -25,6 +25,8 @@ class QuizViewModel(
         data class SetQuestions(val questions: List<QuestionItem>) : ViewEvent
 
         data class SetResult(val result: String) : ViewEvent
+
+        data class SetResultButtonVisibility(val isVisible: Boolean) : ViewEvent
     }
 
     private val compositeDisposable = CompositeDisposable()
@@ -58,14 +60,17 @@ class QuizViewModel(
                     override fun onSuccess(words: List<Word>) {
                         if (words.size >= MIN_WORD_AMOUNT) {
                             setEvent(BaseEvent.ShowPlaceholder(false))
+                            setEvent(QuizEvent.SetResultButtonVisibility(true))
                             generateQuestions(words)
                         } else {
                             setEvent(BaseEvent.ShowPlaceholder(true))
+                            setEvent(QuizEvent.SetResultButtonVisibility(false))
                         }
                     }
 
                     override fun onError(e: Throwable) {
                         setEvent(BaseEvent.ShowPlaceholder(true))
+                        setEvent(QuizEvent.SetResultButtonVisibility(false))
                         setEvent(BaseEvent.ShowMessage(R.string.general_error))
                     }
                 })

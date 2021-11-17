@@ -91,14 +91,17 @@ class QuizFragment : Fragment() {
                     override fun onSuccess(words: List<Word>) {
                         if (words.size >= MIN_WORD_AMOUNT) {
                             showPlaceholder(false)
+                            changeResultButtonVisibility(true)
                             setQuestions(words)
                         } else {
                             showPlaceholder(true)
+                            changeResultButtonVisibility(false)
                         }
                     }
 
                     override fun onError(e: Throwable) {
                         showPlaceholder(true)
+                        changeResultButtonVisibility(false)
                         showToast(R.string.general_error)
                     }
                 })
@@ -179,6 +182,10 @@ class QuizFragment : Fragment() {
 
     private fun showToast(resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun changeResultButtonVisibility(isVisible: Boolean) {
+        binding.btnResult.isVisible = isVisible
     }
 
     override fun onDestroy() {

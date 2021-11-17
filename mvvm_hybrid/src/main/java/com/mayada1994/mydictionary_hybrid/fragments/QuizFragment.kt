@@ -55,6 +55,8 @@ class QuizFragment : Fragment() {
 
                 is QuizEvent.SetResult -> showResultFragment(event.result)
 
+                is QuizEvent.SetResultButtonVisibility -> changeResultButtonVisibility(event.isVisible)
+
                 is BaseEvent.SetDefaultLanguage -> setToolbar(event.defaultLanguage)
 
                 is BaseEvent.ShowProgress -> showProgress(event.isProgressVisible)
@@ -97,6 +99,10 @@ class QuizFragment : Fragment() {
 
     private fun showMessage(resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun changeResultButtonVisibility(isVisible: Boolean) {
+        binding.btnResult.isVisible = isVisible
     }
 
     override fun onDestroy() {

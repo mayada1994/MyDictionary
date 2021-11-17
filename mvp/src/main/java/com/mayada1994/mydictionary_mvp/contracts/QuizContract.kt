@@ -19,6 +19,7 @@ class QuizContract {
         fun showProgress(isVisible: Boolean)
         fun showPlaceholder(isVisible: Boolean)
         fun showMessage(@StringRes resId: Int)
+        fun changeResultButtonVisibility(isVisible: Boolean)
     }
 
 }
