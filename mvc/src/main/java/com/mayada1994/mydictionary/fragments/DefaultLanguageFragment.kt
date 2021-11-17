@@ -47,7 +47,7 @@ class DefaultLanguageFragment : Fragment() {
 
         languageDataSource = DictionaryComponent.languageDataSource
 
-        setListeners()
+        initListeners()
     }
 
     override fun onResume() {
@@ -57,7 +57,7 @@ class DefaultLanguageFragment : Fragment() {
         getLanguages()
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnAdd.setOnClickListener { goToAddLanguagesFragment() }
     }
 

@@ -84,25 +84,10 @@ class MainFragment : Fragment(), MainMenuView {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
-    fun setFragment(fragment: Fragment) {
-        val current = getCurrentFragment()
-        if (current != null && fragment.javaClass == current.javaClass) {
-            return
-        }
-        parentFragmentManager.commit {
-            addToBackStack(null)
-            replace(R.id.container, fragment, fragment::class.java.simpleName)
-        }
-    }
-
     private fun setFragmentWithoutAddingToBackStack(fragment: Fragment) {
         parentFragmentManager.commit {
             replace(R.id.container, fragment, fragment::class.java.simpleName)
         }
-    }
-
-    private fun getCurrentFragment(): Fragment? {
-        return parentFragmentManager.findFragmentById(R.id.container)
     }
 
     private fun clearFragments() {

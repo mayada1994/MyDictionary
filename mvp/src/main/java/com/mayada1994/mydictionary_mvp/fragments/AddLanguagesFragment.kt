@@ -34,12 +34,12 @@ class AddLanguagesFragment : Fragment(), AddLanguagesContract.ViewInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
+        initListeners()
 
         presenter.init(arguments?.getParcelableArrayList(LANGUAGES) ?: emptyList())
     }
 
-    private fun setListeners() {
+    private fun initListeners() {
         binding.btnSave.setOnClickListener { presenter.onSaveButtonClick() }
     }
 

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">My Dictionary MVVM</string>
+    <string name="arabic_language">Арабська</string>
+    <string name="chinese_language">Китайська</string>
+    <string name="english_language">Англійська</string>
+    <string name="french_language">Французька</string>
+    <string name="german_language">Німецька</string>
+    <string name="italian_language">Італійська</string>
+    <string name="japanese_language">Японська</string>
+    <string name="korean_language">Корейська</string>
+    <string name="polish_language">Польська</string>
+    <string name="spanish_language">Іспанська</string>
+    <string name="turkish_language">Турецька</string>
+
+    <string name="pick_languages">Оберіть принаймні одну мову, яку Ви хочете вивчати.</string>
+    <string name="pick_languages_warning">Для продовження оберіть принаймні одну мову</string>
+    <string name="save">Зберегти</string>
+
+    <string name="general_error">Щось пішло не так. Будь ласка, спробуйте пізніше</string>
+
+    <string name="dictionary_menu_item">Словник</string>
+    <string name="quiz_menu_item">Тест</string>
+    <string name="languages_menu_item">Мови</string>
+    <string name="statistics_menu_item">Статистика</string>
+    <string name="words_placeholder_message">Словник пустий. Будь ласка, додайте слова за допомогою хрестика на панелі зверху.</string>
+    <string name="quiz_words_placeholder_message">Недостатньо слів. Щоб пройти тест в словнику повинно бути мінімум 4 слова. Будь ласка, додайте слова на сторінці \"Словник\".</string>
+    <string name="add_new_word_prompt">Додати нове слово</string>
+    <string name="word">Слово</string>
+    <string name="translation">Переклад</string>
+    <string name="cancel">Скасувати</string>
+    <string name="fill_all_fields_prompt">Будь ласка, заповніть всі поля для продовження</string>
+    <string name="word_added_successfully">Слово успішно додано до словника</string>
+    <string name="word_deleted_successfully">Слово успішно видалено зі словника</string>
+    <string name="delete_word_prompt">Видалити обране слово зі словника?</string>
+    <string name="delete">Видалити</string>
+    <string name="your_result">Ваш результат</string>
+    <string name="stats_placeholder_message">Статистика пуста. Будь ласка, пройдіть тест для її поповнення.</string>
+</resources>
