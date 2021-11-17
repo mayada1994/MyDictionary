@@ -1,6 +1,7 @@
 package com.mayada1994.mydictionary_hybrid.activities
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
@@ -8,12 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.databinding.ActivityMainBinding
+import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
+import com.mayada1994.mydictionary_hybrid.viewmodels.MainViewModel
+import com.mayada1994.mydictionary_hybrid.viewmodels.MainViewModel.MainEvent
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-//    private val viewModel by viewModels<MainViewModel> { DictionaryComponent.viewModelFactory }
+    private val viewModel by viewModels<MainViewModel> { DictionaryComponent.viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +28,15 @@ class MainActivity : AppCompatActivity() {
 
         initObservers()
 
-//        viewModel.init()
+        viewModel.init()
     }
 
     private fun initObservers() {
-//        viewModel.selectedScreen.observe(this, { fragmentClass ->
-//            setFragment(fragmentClass)
-//        })
+        viewModel.event.observe(this, { event ->
+            when (event) {
+                is MainEvent.ShowSelectedScreen -> setFragment(event.fragmentClass)
+            }
+        })
     }
 
     fun setFragment(fragmentClass: Class<out Fragment>) {
