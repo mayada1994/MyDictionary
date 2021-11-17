@@ -30,9 +30,9 @@ class ViewModelFactory(
         modelClass.isAssignableFrom(StatisticsViewModel::class.java) -> StatisticsViewModel(
             statisticsRepository
         ) as T
-//        modelClass.isAssignableFrom(DefaultLanguageViewModel::class.java) -> DefaultLanguageViewModel(
-//            languageRepository
-//        ) as T
+        modelClass.isAssignableFrom(DefaultLanguageViewModel::class.java) -> DefaultLanguageViewModel(
+            languageRepository
+        ) as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }
 
