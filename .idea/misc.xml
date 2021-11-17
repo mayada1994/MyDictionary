@@ -36,6 +36,7 @@
         <entry key="mvp/src/main/res/layout/fragment_dictionary.xml" value="0.19739583333333333" />
         <entry key="mvp/src/main/res/layout/layout_toolbar.xml" value="0.19739583333333333" />
         <entry key="mvvm/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
+        <entry key="mvvm_hybrid/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
       </map>
     </option>
   </component>
