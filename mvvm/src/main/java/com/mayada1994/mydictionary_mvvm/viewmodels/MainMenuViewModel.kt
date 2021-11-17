@@ -22,24 +22,32 @@ class MainMenuViewModel : ViewModel() {
 
     fun onMenuItemSelected(itemId: Int) {
         when (itemId) {
-            R.id.dictionary_menu_item -> SelectedScreen(
-                DictionaryFragment::class.java,
-                selectedMenuItemId = 0
+            R.id.dictionary_menu_item -> _selectedScreen.postValue(
+                SelectedScreen(
+                    DictionaryFragment::class.java,
+                    selectedMenuItemId = 0
+                )
             )
 
-            R.id.quiz_menu_item -> SelectedScreen(
-                QuizFragment::class.java,
-                selectedMenuItemId = 1
+            R.id.quiz_menu_item -> _selectedScreen.postValue(
+                SelectedScreen(
+                    QuizFragment::class.java,
+                    selectedMenuItemId = 1
+                )
             )
 
-            R.id.languages_menu_item -> SelectedScreen(
-                DefaultLanguageFragment::class.java,
-                selectedMenuItemId = 2
+            R.id.languages_menu_item -> _selectedScreen.postValue(
+                SelectedScreen(
+                    DefaultLanguageFragment::class.java,
+                    selectedMenuItemId = 2
+                )
             )
 
-            R.id.statistics_menu_item -> SelectedScreen(
-                StatisticsFragment::class.java,
-                selectedMenuItemId = 3
+            R.id.statistics_menu_item -> _selectedScreen.postValue(
+                SelectedScreen(
+                    StatisticsFragment::class.java,
+                    selectedMenuItemId = 3
+                )
             )
 
             else -> _toastMessageStringResId.postValue(R.string.general_error)
