@@ -2,6 +2,7 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import androidx.fragment.app.Fragment
 import com.mayada1994.mydictionary_hybrid.R
+import com.mayada1994.mydictionary_hybrid.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 
 class MainMenuViewModel : BaseViewModel() {
@@ -16,11 +17,11 @@ class MainMenuViewModel : BaseViewModel() {
     fun onMenuItemSelected(itemId: Int) {
         setEvent(
             when (itemId) {
-//                R.id.dictionary_menu_item -> MainMenuEvent.ShowSelectedScreen(
-//                    DictionaryFragment::class.java,
-//                    selectedMenuItemId = 0
-//                )
-//
+                R.id.dictionary_menu_item -> MainMenuEvent.ShowSelectedScreen(
+                    DictionaryFragment::class.java,
+                    selectedMenuItemId = 0
+                )
+
 //                R.id.quiz_menu_item -> MainMenuEvent.ShowSelectedScreen(
 //                    QuizFragment::class.java,
 //                    selectedMenuItemId = 1

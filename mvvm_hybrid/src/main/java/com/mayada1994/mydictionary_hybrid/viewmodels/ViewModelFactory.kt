@@ -19,9 +19,9 @@ class ViewModelFactory(
         modelClass.isAssignableFrom(AddLanguagesViewModel::class.java) -> AddLanguagesViewModel(
             languageRepository
         ) as T
-//        modelClass.isAssignableFrom(DictionaryViewModel::class.java) -> DictionaryViewModel(
-//            wordRepository
-//        ) as T
+        modelClass.isAssignableFrom(DictionaryViewModel::class.java) -> DictionaryViewModel(
+            wordRepository
+        ) as T
 //        modelClass.isAssignableFrom(ResultViewModel::class.java) -> ResultViewModel() as T
 //        modelClass.isAssignableFrom(QuizViewModel::class.java) -> QuizViewModel(
 //            wordRepository,
