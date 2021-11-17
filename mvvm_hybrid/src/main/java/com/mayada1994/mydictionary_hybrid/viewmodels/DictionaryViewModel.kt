@@ -3,7 +3,6 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 import android.text.Editable
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
-import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Word
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
@@ -19,8 +18,6 @@ class DictionaryViewModel(private val wordRepository: WordRepository) : BaseView
     sealed class DictionaryEvent {
         data class SetWords(val words: List<Word>) : ViewEvent
 
-        data class SetDefaultLanguage(val defaultLanguage: LanguageInfo) : ViewEvent
-
         object ShowAddNewWordDialog : ViewEvent
     }
 
@@ -33,7 +30,7 @@ class DictionaryViewModel(private val wordRepository: WordRepository) : BaseView
             defaultLanguage = it
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {
-                setEvent(DictionaryEvent.SetDefaultLanguage(it))
+                setEvent(BaseEvent.SetDefaultLanguage(it))
             }
         }
     }

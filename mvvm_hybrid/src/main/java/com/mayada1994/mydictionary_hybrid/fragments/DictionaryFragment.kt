@@ -57,11 +57,11 @@ class DictionaryFragment : Fragment() {
     private fun initObservers() {
         viewModel.event.observe(viewLifecycleOwner, { event ->
             when (event) {
-                is DictionaryEvent.SetDefaultLanguage -> setToolbar(event.defaultLanguage)
-
                 is DictionaryEvent.SetWords -> setWords(event.words)
 
                 is DictionaryEvent.ShowAddNewWordDialog -> showAddNewWordDialog()
+
+                is BaseEvent.SetDefaultLanguage -> setToolbar(event.defaultLanguage)
 
                 is BaseEvent.ShowProgress -> showProgress(event.isProgressVisible)
 
