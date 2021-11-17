@@ -1,0 +1,3 @@
+package com.mayada1994.mydictionary_hybrid.utils
+
+interface ViewEvent
