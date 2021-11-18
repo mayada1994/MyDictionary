@@ -9,10 +9,6 @@ class LanguageRepository(private val languageDao: LanguageDao) {
 
     fun getLanguages(): Single<List<Language>> = languageDao.getLanguages()
 
-    fun insertLanguage(language: Language): Completable = languageDao.insertLanguage(language)
-
     fun insertLanguages(languages: List<Language>): Completable = languageDao.insertLanguages(languages)
-
-    fun deleteLanguage(language: Language): Completable = languageDao.deleteLanguage(language)
 
 }

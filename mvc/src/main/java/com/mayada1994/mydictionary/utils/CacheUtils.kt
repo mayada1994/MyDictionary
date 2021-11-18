@@ -5,10 +5,6 @@ import androidx.core.content.edit
 
 class CacheUtils(private val sharedPreferences: SharedPreferences) {
 
-    fun cleanCache() {
-        sharedPreferences.edit { clear() }
-    }
-
     var defaultLanguage: String?
         get() = sharedPreferences.getString(CACHED_DEFAULT_LANGUAGE, null)
         set(language) = sharedPreferences.edit { putString(CACHED_DEFAULT_LANGUAGE, language) }
