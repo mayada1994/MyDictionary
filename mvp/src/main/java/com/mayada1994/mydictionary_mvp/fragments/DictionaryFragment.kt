@@ -59,7 +59,7 @@ class DictionaryFragment : Fragment(), DictionaryContract.ViewInterface {
         with(dialogView) {
             btnSave.setOnClickListener {
                 alertDialog.dismiss()
-                presenter.onSaveButtonClick(fWord.text, fTranslation.text)
+                presenter.onSaveButtonClick(fWord.text.toString(), fTranslation.text.toString())
             }
             btnCancel.setOnClickListener {
                 alertDialog.dismiss()

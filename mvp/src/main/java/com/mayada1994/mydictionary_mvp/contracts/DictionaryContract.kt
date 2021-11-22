@@ -1,6 +1,5 @@
 package com.mayada1994.mydictionary_mvp.contracts
 
-import android.text.Editable
 import androidx.annotation.StringRes
 import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvp.entities.Word
@@ -10,7 +9,7 @@ class DictionaryContract {
     interface PresenterInterface {
         fun init()
         fun onAddButtonClick()
-        fun onSaveButtonClick(word: Editable?, translation: Editable?)
+        fun onSaveButtonClick(word: String?, translation: String?)
         fun onDeleteButtonClick(word: Word)
         fun onDestroy()
     }

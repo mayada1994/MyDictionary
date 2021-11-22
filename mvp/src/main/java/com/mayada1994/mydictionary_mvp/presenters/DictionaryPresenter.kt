@@ -1,6 +1,5 @@
 package com.mayada1994.mydictionary_mvp.presenters
 
-import android.text.Editable
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.DictionaryContract
 import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
@@ -36,7 +35,7 @@ class DictionaryPresenter(
         viewInterface.showAddNewWordDialog()
     }
 
-    override fun onSaveButtonClick(word: Editable?, translation: Editable?) {
+    override fun onSaveButtonClick(word: String?, translation: String?) {
         if (word.isNullOrBlank() || translation.isNullOrBlank()) {
             viewInterface.showMessage(R.string.fill_all_fields_prompt)
             return
