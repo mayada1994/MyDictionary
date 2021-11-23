@@ -3,13 +3,13 @@ package com.mayada1994.mydictionary_mvvm.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
-import com.mayada1994.mydictionary_mvvm.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvvm.entities.Statistics
 import com.mayada1994.mydictionary_mvvm.entities.Word
 import com.mayada1994.mydictionary_mvvm.items.QuestionItem
 import com.mayada1994.mydictionary_mvvm.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_mvvm.repositories.WordRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +21,8 @@ import timber.log.Timber
 
 class QuizViewModel(
     private val wordRepository: WordRepository,
-    private val statisticsRepository: StatisticsRepository
+    private val statisticsRepository: StatisticsRepository,
+    private val cacheUtils: CacheUtils
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -61,7 +62,7 @@ class QuizViewModel(
     }
 
     fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {
                 _defaultLanguage.postValue(it)

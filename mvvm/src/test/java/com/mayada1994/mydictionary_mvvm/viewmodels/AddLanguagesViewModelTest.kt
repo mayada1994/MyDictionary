@@ -1,13 +1,16 @@
-package com.mayada1994.mydictionary_mvp.presenters
+package com.mayada1994.mydictionary_mvvm.viewmodels
 
-import com.mayada1994.mydictionary_mvp.R
-import com.mayada1994.mydictionary_mvp.contracts.AddLanguagesContract
-import com.mayada1994.mydictionary_mvp.entities.Language
-import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
-import com.mayada1994.mydictionary_mvp.fragments.MainFragment
-import com.mayada1994.mydictionary_mvp.models.LanguageDataSource
-import com.mayada1994.mydictionary_mvp.utils.CacheUtils
-import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.mayada1994.mydictionary_mvvm.R
+import com.mayada1994.mydictionary_mvvm.entities.Language
+import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
+import com.mayada1994.mydictionary_mvvm.fragments.MainFragment
+import com.mayada1994.mydictionary_mvvm.items.LanguageItem
+import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
+import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Completable
@@ -16,61 +19,78 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
 
-class AddLanguagesPresenterTest {
+class AddLanguagesViewModelTest {
 
     @Rule
     @JvmField
     var testSchedulerRule = RxImmediateSchedulerRule()
 
-    private val viewInterface: AddLanguagesContract.ViewInterface = mockk()
+    @get:Rule
+    var rule: TestRule = InstantTaskExecutorRule()
 
-    private val languageDataSource: LanguageDataSource = mockk()
+    private val observerLanguagesList: Observer<List<LanguageItem>> = mockk()
+    private val observerSelectedScreen: Observer<Class<out Fragment>> = mockk()
+    private val observerOnBackPressed: Observer<Boolean> = mockk()
+    private val observerIsProgressVisible: Observer<Boolean> = mockk()
+    private val observerToastMessageStringResId: Observer<Int> = mockk()
 
+    private val languageRepository: LanguageRepository = mockk()
+    
     private val cacheUtils: CacheUtils = mockk()
 
-    private lateinit var presenter: AddLanguagesPresenter
+    private lateinit var viewModel: AddLanguagesViewModel
 
     @Before
     fun setup() {
-        presenter = AddLanguagesPresenter(viewInterface, languageDataSource, cacheUtils)
+        viewModel = AddLanguagesViewModel(languageRepository, cacheUtils)
+        viewModel.languagesList.observeForever(observerLanguagesList)
+        viewModel.selectedScreen.observeForever(observerSelectedScreen)
+        viewModel.onBackPressed.observeForever(observerOnBackPressed)
+        viewModel.isProgressVisible.observeForever(observerIsProgressVisible)
+        viewModel.toastMessageStringResId.observeForever(observerToastMessageStringResId)
+        every { observerLanguagesList.onChanged(any()) } just Runs
+        every { observerSelectedScreen.onChanged(any()) } just Runs
+        every { observerOnBackPressed.onChanged(any()) } just Runs
+        every { observerIsProgressVisible.onChanged(any()) } just Runs
+        every { observerToastMessageStringResId.onChanged(any()) } just Runs
     }
 
     @After
     fun clear() {
+        viewModel.onDestroy()
         unmockkAll()
-        presenter.onDestroy()
     }
 
     /**
      * When:
      * - init is called with empty list of languages
      * Then should:
-     * - call setLanguages in viewInterface with list of all languages from LanguageUtils
+     * - post languagesList with list of all languages from LanguageUtils
      */
     @Test
     fun check_init() {
         //Given
         val usedLanguages = emptyList<Language>()
         val languageItems = LanguageUtils.getLanguages().map { it.toLanguageItem() }
-        every { viewInterface.setLanguages(any()) } just Runs
 
         //When
-        presenter.init(usedLanguages)
+        viewModel.init(usedLanguages)
 
         //Then
         verify {
-            viewInterface.setLanguages(languageItems)
+            observerLanguagesList.onChanged(languageItems)
         }
 
-        assertEquals(true, presenter::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(presenter) as Boolean)
+        assertEquals(true, viewModel::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(viewModel) as Boolean)
     }
 
     /**
      * When:
      * - init is called with list of languages
      * Then should:
-     * - call setLanguages in viewInterface with list of all languages from LanguageUtils except given used languages
+     * - post languagesList with list of all languages from LanguageUtils except given used languages
      */
     @Test
     fun check_init_partial() {
@@ -103,17 +123,16 @@ class AddLanguagesPresenterTest {
                 imageRes = R.drawable.ic_turkey
             )
         ).map { it.toLanguageItem() }
-        every { viewInterface.setLanguages(any()) } just Runs
 
         //When
-        presenter.init(usedLanguages)
+        viewModel.init(usedLanguages)
 
         //Then
         verify {
-            viewInterface.setLanguages(languageItems)
+            observerLanguagesList.onChanged(languageItems)
         }
 
-        assertEquals(false, presenter::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(presenter) as Boolean)
+        assertEquals(false, viewModel::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(viewModel) as Boolean)
     }
 
     @Test
@@ -138,10 +157,10 @@ class AddLanguagesPresenterTest {
         )
 
         //When
-        presenter.onLanguagesSelected(languages)
+        viewModel.onLanguagesSelected(languages)
 
         //Then
-        assertEquals(languages, presenter::class.java.getDeclaredField("selectedLanguages").apply { isAccessible = true }.get(presenter) as ArrayList<LanguageInfo>)
+        assertEquals(languages, viewModel::class.java.getDeclaredField("selectedLanguages").apply { isAccessible = true }.get(viewModel) as ArrayList<LanguageInfo>)
     }
 
     /**
@@ -150,18 +169,15 @@ class AddLanguagesPresenterTest {
      * When:
      * - onSaveButtonClick is called
      * Then should:
-     * - call showMessage in viewInterface with R.string.pick_languages_warning as resId
+     * - post toastMessageStringResId with R.string.pick_languages_warning as resId
      */
     @Test
     fun check_onSaveButtonClick_empty() {
-        //Given
-        every { viewInterface.showMessage(any()) } just Runs
-
         //When
-        presenter.onSaveButtonClick()
+        viewModel.onSaveButtonClick()
 
         //Then
-        verify { viewInterface.showMessage(R.string.pick_languages_warning) }
+        verify { observerToastMessageStringResId.onChanged(R.string.pick_languages_warning) }
     }
 
     /**
@@ -171,6 +187,7 @@ class AddLanguagesPresenterTest {
      * - onSaveButtonClick is called
      * Then should:
      * - call saveLanguages with list of selected languages
+     * - post onBackPressed
      */
     @Test
     fun check_onSaveButtonClick() {
@@ -193,26 +210,20 @@ class AddLanguagesPresenterTest {
             )
         )
 
-        presenter.onLanguagesSelected(languages)
+        viewModel.onLanguagesSelected(languages)
 
-        every { viewInterface.showProgress(any()) } just Runs
+        every { languageRepository.insertLanguages(any()) } returns Completable.complete()
 
-        every { languageDataSource.insertLanguages(any()) } returns Completable.complete()
-
-        every { viewInterface.setLanguages(any()) } just Runs
-
-        every { viewInterface.onBackPressed() } just Runs
-
-        presenter.init(languages.map { it.toLanguage() })
+        viewModel.init(languages.map { it.toLanguage() })
 
         //When
-        presenter.onSaveButtonClick()
+        viewModel.onSaveButtonClick()
 
         //Then
         verifyOrder {
-            viewInterface.showProgress(true)
-            viewInterface.onBackPressed()
-            viewInterface.showProgress(false)
+            observerIsProgressVisible.onChanged(true)
+            observerOnBackPressed.onChanged(true)
+            observerIsProgressVisible.onChanged(false)
         }
     }
 
@@ -223,9 +234,9 @@ class AddLanguagesPresenterTest {
      * When:
      * - saveLanguages is called
      * Then should:
-     * - call insertLanguages in languageDataSource with list of selected languages
+     * - call insertLanguages in languageRepository with list of selected languages
      * - cache new default language
-     * - call setFragment in viewInterface with MainFragment::class.java
+     * - post selectedScreen with MainFragment::class.java
      */
     @Test
     fun check_saveLanguages_initialScreen_true() {
@@ -250,20 +261,18 @@ class AddLanguagesPresenterTest {
 
         every { cacheUtils.defaultLanguage = any() } just Runs
 
-        every { languageDataSource.insertLanguages(any()) } returns Completable.complete()
+        every { languageRepository.insertLanguages(any()) } returns Completable.complete()
 
-        every { viewInterface.showProgress(any()) } just Runs
-
-        every { viewInterface.setFragment(any()) } just Runs
+        viewModel.onLanguagesSelected(languages)
 
         //When
-        presenter.saveLanguages(languages)
+        viewModel.onSaveButtonClick()
 
         //Then
         verifyOrder {
-            viewInterface.showProgress(true)
-            viewInterface.setFragment(MainFragment::class.java)
-            viewInterface.showProgress(false)
+            observerIsProgressVisible.onChanged(true)
+            observerSelectedScreen.onChanged(MainFragment::class.java)
+            observerIsProgressVisible.onChanged(false)
         }
     }
 
@@ -274,8 +283,8 @@ class AddLanguagesPresenterTest {
      * When:
      * - saveLanguages is called
      * Then should:
-     * - call insertLanguages in languageDataSource with list of selected languages
-     * - call onBackPressed in viewInterface
+     * - call insertLanguages in languageRepository with list of selected languages
+     * - post onBackPressed
      */
     @Test
     fun check_saveLanguages_initialScreen_false() {
@@ -298,36 +307,32 @@ class AddLanguagesPresenterTest {
             )
         )
 
-        every { languageDataSource.insertLanguages(any()) } returns Completable.complete()
+        every { languageRepository.insertLanguages(any()) } returns Completable.complete()
 
-        every { viewInterface.showProgress(any()) } just Runs
+        viewModel.init(languages.map { it.toLanguage() })
 
-        every { viewInterface.onBackPressed() } just Runs
-
-        every { viewInterface.setLanguages(any()) } just Runs
-
-        presenter.init(languages.map { it.toLanguage() })
+        viewModel.onLanguagesSelected(languages)
 
         //When
-        presenter.saveLanguages(languages)
+        viewModel.onSaveButtonClick()
 
         //Then
         verifyOrder {
-            viewInterface.showProgress(true)
-            viewInterface.onBackPressed()
-            viewInterface.showProgress(false)
+            observerIsProgressVisible.onChanged(true)
+            observerOnBackPressed.onChanged(true)
+            observerIsProgressVisible.onChanged(false)
         }
     }
 
     /**
      * Given:
      * - list of LanguageInfo objects
-     * - insertLanguages in languageDataSource throws error
+     * - insertLanguages in languageRepository throws error
      * When:
      * - saveLanguages is called
      * Then should:
-     * - call insertLanguages in languageDataSource with list of selected languages
-     * - call showMessage in viewInterface with R.string.general_error as resId
+     * - call insertLanguages in languageRepository with list of selected languages
+     * - post toastMessageStringResId with R.string.general_error as resId
      */
     @Test
     fun check_saveLanguages_error() {
@@ -352,20 +357,18 @@ class AddLanguagesPresenterTest {
 
         val testException = Exception("test exception")
 
-        every { languageDataSource.insertLanguages(any()) } returns Completable.error(testException)
+        every { languageRepository.insertLanguages(any()) } returns Completable.error(testException)
 
-        every { viewInterface.showProgress(any()) } just Runs
-
-        every { viewInterface.showMessage(any()) } just Runs
+        viewModel.onLanguagesSelected(languages)
 
         //When
-        presenter.saveLanguages(languages)
+        viewModel.onSaveButtonClick()
 
         //Then
         verifyOrder {
-            viewInterface.showProgress(true)
-            viewInterface.showMessage(R.string.general_error)
+            observerIsProgressVisible.onChanged(true)
+            observerToastMessageStringResId.onChanged(R.string.general_error)
         }
     }
-
+    
 }

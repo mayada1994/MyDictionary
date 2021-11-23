@@ -21,7 +21,7 @@ class AddLanguagesFragment : Fragment(), AddLanguagesContract.ViewInterface {
 
     private lateinit var binding: FragmentAddLanguagesBinding
 
-    private val presenter = AddLanguagesPresenter(this, DictionaryComponent.languageDataSource)
+    private val presenter = AddLanguagesPresenter(this, DictionaryComponent.languageDataSource, DictionaryComponent.cacheUtils)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

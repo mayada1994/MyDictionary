@@ -5,33 +5,40 @@ import androidx.lifecycle.ViewModelProvider
 import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
 import com.mayada1994.mydictionary_mvvm.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_mvvm.repositories.WordRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
     private val languageRepository: LanguageRepository,
     private val statisticsRepository: StatisticsRepository,
-    private val wordRepository: WordRepository
+    private val wordRepository: WordRepository,
+    private val cacheUtils: CacheUtils
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when {
-        modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel() as T
+        modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(cacheUtils) as T
         modelClass.isAssignableFrom(MainMenuViewModel::class.java) -> MainMenuViewModel() as T
         modelClass.isAssignableFrom(AddLanguagesViewModel::class.java) -> AddLanguagesViewModel(
-            languageRepository
+            languageRepository,
+            cacheUtils
         ) as T
         modelClass.isAssignableFrom(DictionaryViewModel::class.java) -> DictionaryViewModel(
-            wordRepository
+            wordRepository,
+            cacheUtils
         ) as T
-        modelClass.isAssignableFrom(ResultViewModel::class.java) -> ResultViewModel() as T
+        modelClass.isAssignableFrom(ResultViewModel::class.java) -> ResultViewModel(cacheUtils) as T
         modelClass.isAssignableFrom(QuizViewModel::class.java) -> QuizViewModel(
             wordRepository,
-            statisticsRepository
+            statisticsRepository,
+            cacheUtils
         ) as T
         modelClass.isAssignableFrom(StatisticsViewModel::class.java) -> StatisticsViewModel(
-            statisticsRepository
+            statisticsRepository,
+            cacheUtils
         ) as T
         modelClass.isAssignableFrom(DefaultLanguageViewModel::class.java) -> DefaultLanguageViewModel(
-            languageRepository
+            languageRepository,
+            cacheUtils
         ) as T
         else -> throw RuntimeException("Unable to create $modelClass")
     }

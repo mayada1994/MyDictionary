@@ -42,7 +42,7 @@ class DictionaryFragment : Fragment(), DictionaryContract.ViewInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = DictionaryPresenter(this, DictionaryComponent.wordDataSource)
+        presenter = DictionaryPresenter(this, DictionaryComponent.wordDataSource, DictionaryComponent.cacheUtils)
         presenter.init()
 
         initListeners()

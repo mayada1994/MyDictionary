@@ -2,11 +2,11 @@ package com.mayada1994.mydictionary_mvp.presenters
 
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.AddLanguagesContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Language
 import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvp.fragments.MainFragment
 import com.mayada1994.mydictionary_mvp.models.LanguageDataSource
+import com.mayada1994.mydictionary_mvp.utils.CacheUtils
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +15,8 @@ import io.reactivex.schedulers.Schedulers
 
 class AddLanguagesPresenter(
     private val viewInterface: AddLanguagesContract.ViewInterface,
-    private val languageDataSource: LanguageDataSource
+    private val languageDataSource: LanguageDataSource,
+    private val cacheUtils: CacheUtils
 ): AddLanguagesContract.PresenterInterface {
 
     private var initialScreen: Boolean = true
@@ -56,7 +57,7 @@ class AddLanguagesPresenter(
                 .subscribeWith(object : DisposableCompletableObserver() {
                     override fun onComplete() {
                         if (initialScreen) {
-                            DictionaryComponent.cacheUtils.defaultLanguage = languages[0].locale
+                            cacheUtils.defaultLanguage = languages[0].locale
                             viewInterface.setFragment(MainFragment::class.java)
                         } else {
                             viewInterface.onBackPressed()

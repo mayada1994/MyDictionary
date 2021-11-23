@@ -1,32 +1,39 @@
-package com.mayada1994.mydictionary_mvp.presenters
+package com.mayada1994.mydictionary_mvvm.viewmodels
 
-import com.mayada1994.mydictionary_mvp.R
-import com.mayada1994.mydictionary_mvp.contracts.ResultContract
-import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
-import com.mayada1994.mydictionary_mvp.utils.CacheUtils
-import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
+import com.mayada1994.mydictionary_mvvm.R
+import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
+import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
 
-class ResultPresenterTest {
+class ResultViewModelTest {
 
     @Rule
     @JvmField
     var testSchedulerRule = RxImmediateSchedulerRule()
 
-    private val viewInterface: ResultContract.ViewInterface = mockk()
+    @get:Rule
+    var rule: TestRule = InstantTaskExecutorRule()
+
+    private val observerDefaultLanguage: Observer<LanguageInfo> = mockk()
 
     private val cacheUtils: CacheUtils = mockk()
 
-    private lateinit var presenter: ResultPresenter
+    private lateinit var viewModel: ResultViewModel
 
     @Before
     fun setup() {
-        presenter = ResultPresenter(viewInterface, cacheUtils)
+        viewModel = ResultViewModel(cacheUtils)
+        viewModel.defaultLanguage.observeForever(observerDefaultLanguage)
+        every { observerDefaultLanguage.onChanged(any()) } just Runs
     }
 
     @After
@@ -41,7 +48,7 @@ class ResultPresenterTest {
      * - init is called
      * Then should:
      * - call getLanguageByCode in LanguageUtils which returns default languageInfo
-     * - call setToolbar in viewInterface with default languageInfo
+     * - post defaultLanguage with default languageInfo
      */
     @Test
     fun check_init() {
@@ -54,15 +61,14 @@ class ResultPresenterTest {
 
         every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
-        every { viewInterface.setToolbar(any()) } just Runs
-
         //When
-        presenter.init()
+        viewModel.init()
 
         verifyOrder {
             LanguageUtils.getLanguageByCode(languageInfo.locale)
-            viewInterface.setToolbar(languageInfo)
+            observerDefaultLanguage.onChanged(languageInfo)
         }
     }
+
 
 }

@@ -2,12 +2,12 @@ package com.mayada1994.mydictionary_mvp.presenters
 
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.QuizContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Statistics
 import com.mayada1994.mydictionary_mvp.entities.Word
 import com.mayada1994.mydictionary_mvp.items.QuestionItem
 import com.mayada1994.mydictionary_mvp.models.StatisticsDataSource
 import com.mayada1994.mydictionary_mvp.models.WordDataSource
+import com.mayada1994.mydictionary_mvp.utils.CacheUtils
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,7 +19,8 @@ import timber.log.Timber
 class QuizPresenter(
     private val viewInterface: QuizContract.ViewInterface,
     private val wordDataSource: WordDataSource,
-    private val statisticsDataSource: StatisticsDataSource
+    private val statisticsDataSource: StatisticsDataSource,
+    private val cacheUtils: CacheUtils
 ): QuizContract.PresenterInterface {
 
     private val compositeDisposable = CompositeDisposable()
@@ -33,7 +34,7 @@ class QuizPresenter(
     }
 
     override fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {

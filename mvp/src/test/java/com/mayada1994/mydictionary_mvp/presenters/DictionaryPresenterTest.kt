@@ -1,10 +1,7 @@
 package com.mayada1994.mydictionary_mvp.presenters
 
-import android.app.Application
-import android.content.SharedPreferences
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.DictionaryContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvp.entities.Word
 import com.mayada1994.mydictionary_mvp.models.WordDataSource
@@ -29,11 +26,13 @@ class DictionaryPresenterTest {
 
     private val wordDataSource: WordDataSource = mockk()
 
+    private val cacheUtils: CacheUtils = mockk()
+
     private lateinit var presenter: DictionaryPresenter
 
     @Before
     fun setup() {
-        presenter = DictionaryPresenter(viewInterface, wordDataSource)
+        presenter = DictionaryPresenter(viewInterface, wordDataSource, cacheUtils)
     }
 
     @After
@@ -62,14 +61,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -148,14 +140,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -215,14 +200,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -272,14 +250,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -320,14 +291,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -374,14 +338,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -427,14 +384,7 @@ class DictionaryPresenterTest {
             imageRes = R.drawable.ic_england
         )
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns languageInfo.locale
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns languageInfo.locale
 
         every { viewInterface.showProgress(any()) } just Runs
 
@@ -477,14 +427,7 @@ class DictionaryPresenterTest {
 
         val word = Word("cat", "кіт", language)
 
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns language
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns language
 
         every { wordDataSource.getWordsByLanguage(any()) } returns Single.just(emptyList())
 
@@ -525,20 +468,7 @@ class DictionaryPresenterTest {
 
         val word = Word("cat", "кіт", language)
 
-        val languageInfo = LanguageInfo(
-            nameRes = R.string.english_language,
-            locale = "en",
-            imageRes = R.drawable.ic_england
-        )
-
-        val application: Application = mockk()
-        val sharedPreferences: SharedPreferences = mockk(relaxed = true)
-
-        every { application.packageName } returns "com.mayada1994.mydictionary_mvp"
-        every { application.getSharedPreferences(any(), any()) } returns sharedPreferences
-        every { sharedPreferences.getString(CacheUtils.CACHED_DEFAULT_LANGUAGE, null) } returns language
-
-        DictionaryComponent.init(application)
+        every { cacheUtils.defaultLanguage } returns language
 
         every { wordDataSource.getWordsByLanguage(any()) } returns Single.just(emptyList())
 

@@ -35,7 +35,12 @@ class QuizFragment : Fragment(), QuizContract.ViewInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = QuizPresenter(this, DictionaryComponent.wordDataSource, DictionaryComponent.statisticsDataSource)
+        presenter = QuizPresenter(
+            this,
+            DictionaryComponent.wordDataSource,
+            DictionaryComponent.statisticsDataSource,
+            DictionaryComponent.cacheUtils
+        )
         presenter.init()
 
         initListeners()
