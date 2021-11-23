@@ -34,7 +34,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `Given cached default language is null, when init is called, the should call setFragment in viewInterface with AddLanguagesFragment`() {
+    fun `Given cached default language is null, when init is called, then should call setFragment in viewInterface with AddLanguagesFragment`() {
         //Given
         every { cacheUtils.defaultLanguage } returns null
 
@@ -48,7 +48,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `Given cached default language is en, when init is called, the should call setFragment in viewInterface with MainFragment`() {
+    fun `Given cached default language is en, when init is called, then should call setFragment in viewInterface with MainFragment`() {
         //Given
         every { cacheUtils.defaultLanguage } returns "en"
 

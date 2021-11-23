@@ -1,15 +1,15 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
-import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.states.ResultState
+import com.mayada1994.mydictionary_mvi.utils.CacheUtils
 import com.mayada1994.mydictionary_mvi.utils.LanguageUtils
 import io.reactivex.Observable
 
-class ResultInteractor {
+class ResultInteractor(private val cacheUtils: CacheUtils) {
 
     fun getData(): Observable<ResultState> {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             LanguageUtils.getLanguageByCode(it)?.let {
                 return Observable.just(ResultState.DataState(it))
             }

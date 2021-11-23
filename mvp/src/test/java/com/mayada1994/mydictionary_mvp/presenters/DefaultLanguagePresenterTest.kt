@@ -309,7 +309,7 @@ class DefaultLanguagePresenterTest {
     }
 
     @Test
-    fun `Given list of current languages, when onAddButtonClick is clicked, then call navigateToAddLanguagesFragment in viewInterface with given list`() {
+    fun `Given list of current languages, when onAddButtonClick is clicked, then should call navigateToAddLanguagesFragment in viewInterface with given list`() {
         //Given
         every { viewInterface.navigateToAddLanguagesFragment(any()) } just Runs
 

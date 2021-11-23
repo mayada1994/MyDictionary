@@ -36,7 +36,7 @@ class DictionaryFragment : Fragment(), DictionaryView {
 
     private lateinit var textToSpeechEngine: TextToSpeech
 
-    private val saveButtonSubject: PublishSubject<Pair<Editable?, Editable?>> = PublishSubject.create()
+    private val saveButtonSubject: PublishSubject<Pair<String?, String?>> = PublishSubject.create()
 
     private val deleteButtonSubject: PublishSubject<Word> = PublishSubject.create()
 
@@ -51,7 +51,7 @@ class DictionaryFragment : Fragment(), DictionaryView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = DictionaryPresenter(DictionaryInteractor(DictionaryComponent.wordRepository))
+        presenter = DictionaryPresenter(DictionaryInteractor(DictionaryComponent.wordRepository, DictionaryComponent.cacheUtils))
         presenter.bind(this)
     }
 
@@ -79,7 +79,7 @@ class DictionaryFragment : Fragment(), DictionaryView {
         }
     }
 
-    override fun saveButtonClickIntent(): Observable<Pair<Editable?, Editable?>> = saveButtonSubject
+    override fun saveButtonClickIntent(): Observable<Pair<String?, String?>> = saveButtonSubject
 
     override fun deleteButtonClickIntent(): Observable<Word> = deleteButtonSubject
 
@@ -100,7 +100,7 @@ class DictionaryFragment : Fragment(), DictionaryView {
         with(dialogView) {
             btnSave.setOnClickListener {
                 alertDialog.dismiss()
-                saveButtonSubject.onNext(fWord.text to fTranslation.text)
+                saveButtonSubject.onNext(fWord.text.toString() to fTranslation.text.toString())
             }
             btnCancel.setOnClickListener {
                 alertDialog.dismiss()
