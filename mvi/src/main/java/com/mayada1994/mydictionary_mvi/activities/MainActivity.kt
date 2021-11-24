@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity(), MainView {
         binding.progressBar.isVisible = visible
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         presenter.unbind()
     }
 

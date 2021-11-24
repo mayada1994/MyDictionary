@@ -3,7 +3,6 @@ package com.mayada1994.mydictionary_mvi.fragments
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -199,12 +198,12 @@ class DictionaryFragment : Fragment(), DictionaryView {
     override fun onStop() {
         super.onStop()
         textToSpeechEngine.stop()
-        presenter.unbind()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         textToSpeechEngine.shutdown()
+        presenter.unbind()
     }
 
 }

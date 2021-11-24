@@ -124,8 +124,8 @@ class DefaultLanguageFragment : Fragment(), DefaultLanguageView {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         presenter.unbind()
     }
 

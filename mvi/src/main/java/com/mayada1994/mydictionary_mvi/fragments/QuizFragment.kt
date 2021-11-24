@@ -148,8 +148,8 @@ class QuizFragment : Fragment(), QuizView {
         binding.btnResult.isVisible = isVisible
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         presenter.unbind()
     }
 
