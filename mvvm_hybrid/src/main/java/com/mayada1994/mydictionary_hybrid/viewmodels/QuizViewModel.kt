@@ -1,12 +1,12 @@
 package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import com.mayada1994.mydictionary_hybrid.R
-import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
 import com.mayada1994.mydictionary_hybrid.entities.Word
 import com.mayada1994.mydictionary_hybrid.items.QuestionItem
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
+import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
 import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +18,8 @@ import timber.log.Timber
 
 class QuizViewModel(
     private val wordRepository: WordRepository,
-    private val statisticsRepository: StatisticsRepository
+    private val statisticsRepository: StatisticsRepository,
+    private val cacheUtils: CacheUtils
 ) : BaseViewModel() {
 
     sealed class QuizEvent {
@@ -40,7 +41,7 @@ class QuizViewModel(
     }
 
     fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {
