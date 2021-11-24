@@ -3,11 +3,11 @@ package com.mayada1994.mydictionary_mvvm.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
-import com.mayada1994.mydictionary_mvvm.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvvm.entities.Language
 import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvvm.items.DefaultLanguageItem
 import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,7 +15,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class DefaultLanguageViewModel(private val languageRepository: LanguageRepository) : ViewModel() {
+class DefaultLanguageViewModel(
+    private val languageRepository: LanguageRepository,
+    private val cacheUtils: CacheUtils
+) : ViewModel() {
 
     private var currentLanguages: List<Language> = emptyList()
 
@@ -46,9 +49,9 @@ class DefaultLanguageViewModel(private val languageRepository: LanguageRepositor
         get() = _toastMessageStringResId
 
     fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
-            getLanguages()
+        cacheUtils.defaultLanguage?.let {
             LanguageUtils.getLanguageByCode(it)?.let { _defaultLanguage.postValue(it) }
+            getLanguages()
         }
     }
 
@@ -92,7 +95,7 @@ class DefaultLanguageViewModel(private val languageRepository: LanguageRepositor
     }
 
     fun setDefaultLanguage(language: DefaultLanguageItem) {
-        DictionaryComponent.cacheUtils.defaultLanguage = language.locale
+        cacheUtils.defaultLanguage = language.locale
         LanguageUtils.getLanguageByCode(language.locale)?.let {
             _defaultLanguage.postValue(it)
         }

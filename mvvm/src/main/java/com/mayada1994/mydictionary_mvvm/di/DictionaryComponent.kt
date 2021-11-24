@@ -36,15 +36,15 @@ object DictionaryComponent {
 
     private val wordRepository: WordRepository by lazy { WordRepository(wordDao) }
 
-    val viewModelFactory: ViewModelFactory by lazy { ViewModelFactory(languageRepository, statisticsRepository, wordRepository) }
-
-    val cacheUtils: CacheUtils by lazy {
+    private val cacheUtils: CacheUtils by lazy {
         CacheUtils(
             PreferenceManager.getDefaultSharedPreferences(
                 application
             )
         )
     }
+
+    val viewModelFactory: ViewModelFactory by lazy { ViewModelFactory(languageRepository, statisticsRepository, wordRepository, cacheUtils) }
 
     fun init(application: Application) {
         DictionaryComponent.application = application

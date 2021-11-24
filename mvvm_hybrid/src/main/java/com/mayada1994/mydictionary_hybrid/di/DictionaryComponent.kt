@@ -10,8 +10,8 @@ import com.mayada1994.mydictionary_hybrid.db.dao.WordDao
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
-import com.mayada1994.mydictionary_hybrid.viewmodels.ViewModelFactory
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
+import com.mayada1994.mydictionary_hybrid.viewmodels.ViewModelFactory
 
 object DictionaryComponent {
 
@@ -38,15 +38,15 @@ object DictionaryComponent {
 
     private val wordRepository: WordRepository by lazy { WordRepository(wordDao) }
 
-    val viewModelFactory: ViewModelFactory by lazy { ViewModelFactory(languageRepository, statisticsRepository, wordRepository) }
-
-    val cacheUtils: CacheUtils by lazy {
+    private val cacheUtils: CacheUtils by lazy {
         CacheUtils(
             PreferenceManager.getDefaultSharedPreferences(
                 application
             )
         )
     }
+
+    val viewModelFactory: ViewModelFactory by lazy { ViewModelFactory(languageRepository, statisticsRepository, wordRepository, cacheUtils) }
 
     fun init(application: Application) {
         DictionaryComponent.application = application

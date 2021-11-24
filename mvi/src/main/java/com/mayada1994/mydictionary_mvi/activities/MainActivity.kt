@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.mayada1994.mydictionary_mvi.R
 import com.mayada1994.mydictionary_mvi.databinding.ActivityMainBinding
+import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.interactors.MainInteractor
 import com.mayada1994.mydictionary_mvi.presenters.MainPresenter
 import com.mayada1994.mydictionary_mvi.states.MainState
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MainPresenter(MainInteractor())
+        presenter = MainPresenter(MainInteractor(DictionaryComponent.cacheUtils))
         presenter.bind(this)
     }
 

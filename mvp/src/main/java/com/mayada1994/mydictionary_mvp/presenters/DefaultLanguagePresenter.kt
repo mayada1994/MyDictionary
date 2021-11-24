@@ -2,10 +2,10 @@ package com.mayada1994.mydictionary_mvp.presenters
 
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.DefaultLanguageContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Language
 import com.mayada1994.mydictionary_mvp.items.DefaultLanguageItem
 import com.mayada1994.mydictionary_mvp.models.LanguageDataSource
+import com.mayada1994.mydictionary_mvp.utils.CacheUtils
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -14,7 +14,8 @@ import io.reactivex.schedulers.Schedulers
 
 class DefaultLanguagePresenter(
     private val viewInterface: DefaultLanguageContract.ViewInterface,
-    private val languageDataSource: LanguageDataSource
+    private val languageDataSource: LanguageDataSource,
+    private val cacheUtils: CacheUtils
 ): DefaultLanguageContract.PresenterInterface {
 
     private var defaultLanguage: String? = null
@@ -24,7 +25,7 @@ class DefaultLanguagePresenter(
     private val compositeDisposable = CompositeDisposable()
 
     override fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             getLanguages()
             LanguageUtils.getLanguageByCode(it)?.let { viewInterface.setToolbar(it) }
@@ -71,7 +72,7 @@ class DefaultLanguagePresenter(
     }
 
     override fun setDefaultLanguage(language: DefaultLanguageItem) {
-        DictionaryComponent.cacheUtils.defaultLanguage = language.locale
+        cacheUtils.defaultLanguage = language.locale
         LanguageUtils.getLanguageByCode(language.locale)?.let {
             defaultLanguage = it.locale
             viewInterface.setToolbar(it)

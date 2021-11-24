@@ -37,7 +37,7 @@ class StatisticsFragment : Fragment(), StatisticsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = StatisticsPresenter(StatisticsInteractor(DictionaryComponent.statisticsRepository))
+        presenter = StatisticsPresenter(StatisticsInteractor(DictionaryComponent.statisticsRepository, DictionaryComponent.cacheUtils))
         presenter.bind(this)
     }
 

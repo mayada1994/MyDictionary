@@ -1,7 +1,6 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
-import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvi.entities.Statistics
 import com.mayada1994.mydictionary_mvi.entities.Word
@@ -9,13 +8,15 @@ import com.mayada1994.mydictionary_mvi.items.QuestionItem
 import com.mayada1994.mydictionary_mvi.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_mvi.repositories.WordRepository
 import com.mayada1994.mydictionary_mvi.states.QuizState
+import com.mayada1994.mydictionary_mvi.utils.CacheUtils
 import com.mayada1994.mydictionary_mvi.utils.LanguageUtils
 import io.reactivex.Observable
 import timber.log.Timber
 
 class QuizInteractor(
     private val wordRepository: WordRepository,
-    private val statisticsRepository: StatisticsRepository
+    private val statisticsRepository: StatisticsRepository,
+    private val cacheUtils: CacheUtils
 ) {
 
     private var defaultLanguage: String? = null
@@ -27,7 +28,7 @@ class QuizInteractor(
     }
 
     fun getData(): Observable<QuizState> {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             LanguageUtils.getLanguageByCode(it)?.let {
                 return getWords(it)

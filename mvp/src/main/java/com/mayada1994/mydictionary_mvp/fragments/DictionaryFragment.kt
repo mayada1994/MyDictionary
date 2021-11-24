@@ -42,7 +42,7 @@ class DictionaryFragment : Fragment(), DictionaryContract.ViewInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = DictionaryPresenter(this, DictionaryComponent.wordDataSource)
+        presenter = DictionaryPresenter(this, DictionaryComponent.wordDataSource, DictionaryComponent.cacheUtils)
         presenter.init()
 
         initListeners()
@@ -59,7 +59,7 @@ class DictionaryFragment : Fragment(), DictionaryContract.ViewInterface {
         with(dialogView) {
             btnSave.setOnClickListener {
                 alertDialog.dismiss()
-                presenter.onSaveButtonClick(fWord.text, fTranslation.text)
+                presenter.onSaveButtonClick(fWord.text.toString(), fTranslation.text.toString())
             }
             btnCancel.setOnClickListener {
                 alertDialog.dismiss()

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.mayada1994.mydictionary_mvi.databinding.FragmentResultBinding
+import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvi.interactors.ResultInteractor
 import com.mayada1994.mydictionary_mvi.presenters.ResultPresenter
@@ -40,7 +41,7 @@ class ResultFragment : Fragment(), ResultView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = ResultPresenter(ResultInteractor())
+        presenter = ResultPresenter(ResultInteractor(DictionaryComponent.cacheUtils))
         presenter.bind(this)
 
         setResult()

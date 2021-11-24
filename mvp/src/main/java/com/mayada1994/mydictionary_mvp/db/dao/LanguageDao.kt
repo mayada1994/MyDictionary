@@ -1,6 +1,9 @@
 package com.mayada1994.mydictionary_mvp.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mayada1994.mydictionary_mvp.entities.Language
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -12,12 +15,6 @@ interface LanguageDao {
     fun getLanguages(): Single<List<Language>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLanguage(language: Language): Completable
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLanguages(languages: List<Language>): Completable
-
-    @Delete
-    fun deleteLanguage(language: Language): Completable
 
 }

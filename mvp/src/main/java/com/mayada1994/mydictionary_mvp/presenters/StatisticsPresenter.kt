@@ -2,9 +2,9 @@ package com.mayada1994.mydictionary_mvp.presenters
 
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.StatisticsContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Statistics
 import com.mayada1994.mydictionary_mvp.models.StatisticsDataSource
+import com.mayada1994.mydictionary_mvp.utils.CacheUtils
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -13,13 +13,14 @@ import io.reactivex.schedulers.Schedulers
 
 class StatisticsPresenter(
     private val viewInterface: StatisticsContract.ViewInterface,
-    private val statisticsDataSource: StatisticsDataSource
+    private val statisticsDataSource: StatisticsDataSource,
+    private val cacheUtils: CacheUtils
 ): StatisticsContract.PresenterInterface {
 
     private val compositeDisposable = CompositeDisposable()
 
     override fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             getStats(it)
             LanguageUtils.getLanguageByCode(it)?.let { viewInterface.setToolbar(it) }
         }

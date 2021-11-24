@@ -9,13 +9,14 @@ import androidx.fragment.app.commit
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.MainContract
 import com.mayada1994.mydictionary_mvp.databinding.ActivityMainBinding
+import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.presenters.MainPresenter
 
 class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val presenter = MainPresenter(this)
+    private val presenter = MainPresenter(this, DictionaryComponent.cacheUtils)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

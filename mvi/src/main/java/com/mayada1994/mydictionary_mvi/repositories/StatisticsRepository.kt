@@ -10,6 +10,4 @@ class StatisticsRepository(private val statisticsDao: StatisticsDao) {
 
     fun insertStatistics(statistics: Statistics): Single<Unit> = statisticsDao.insertStatistics(statistics)
 
-    fun deleteStatistics(statistics: Statistics): Single<Unit> = statisticsDao.deleteStatistics(statistics)
-
 }

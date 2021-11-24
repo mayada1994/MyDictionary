@@ -42,7 +42,7 @@ class DefaultLanguageFragment : Fragment(), DefaultLanguageView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = DefaultLanguagePresenter(DefaultLanguageInteractor(DictionaryComponent.languageRepository))
+        presenter = DefaultLanguagePresenter(DefaultLanguageInteractor(DictionaryComponent.languageRepository, DictionaryComponent.cacheUtils))
         presenter.bind(this)
     }
 

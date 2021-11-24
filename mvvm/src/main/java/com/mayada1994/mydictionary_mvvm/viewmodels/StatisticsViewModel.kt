@@ -3,10 +3,10 @@ package com.mayada1994.mydictionary_mvvm.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
-import com.mayada1994.mydictionary_mvvm.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvvm.entities.Statistics
 import com.mayada1994.mydictionary_mvvm.repositories.StatisticsRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,7 +14,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class StatisticsViewModel(private val statisticsRepository: StatisticsRepository) : ViewModel() {
+class StatisticsViewModel(
+    private val statisticsRepository: StatisticsRepository,
+    private val cacheUtils: CacheUtils
+) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -39,7 +42,7 @@ class StatisticsViewModel(private val statisticsRepository: StatisticsRepository
         get() = _toastMessageStringResId
 
     fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             getStats(it)
             LanguageUtils.getLanguageByCode(it)?.let { _defaultLanguage.postValue(it) }
         }

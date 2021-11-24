@@ -1,6 +1,9 @@
 package com.mayada1994.mydictionary_hybrid.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -13,8 +16,5 @@ interface StatisticsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertStatistics(statistics: Statistics): Completable
-
-    @Delete
-    fun deleteStatistics(statistics: Statistics): Completable
 
 }

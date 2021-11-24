@@ -1,10 +1,9 @@
 package com.mayada1994.mydictionary_hybrid.viewmodels
 
-import android.text.Editable
 import com.mayada1994.mydictionary_hybrid.R
-import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.Word
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
+import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
 import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +12,10 @@ import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class DictionaryViewModel(private val wordRepository: WordRepository) : BaseViewModel() {
+class DictionaryViewModel(
+    private val wordRepository: WordRepository,
+    private val cacheUtils: CacheUtils
+) : BaseViewModel() {
 
     sealed class DictionaryEvent {
         data class SetWords(val words: List<Word>) : ViewEvent
@@ -26,7 +28,7 @@ class DictionaryViewModel(private val wordRepository: WordRepository) : BaseView
     private var defaultLanguage: String? = null
 
     fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {
@@ -39,7 +41,7 @@ class DictionaryViewModel(private val wordRepository: WordRepository) : BaseView
         setEvent(DictionaryEvent.ShowAddNewWordDialog)
     }
 
-    fun onSaveButtonClick(word: Editable?, translation: Editable?) {
+    fun onSaveButtonClick(word: String?, translation: String?) {
         if (word.isNullOrBlank() || translation.isNullOrBlank()) {
             setEvent(BaseEvent.ShowMessage(R.string.fill_all_fields_prompt))
             return

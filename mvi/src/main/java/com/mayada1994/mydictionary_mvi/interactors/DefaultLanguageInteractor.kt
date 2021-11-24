@@ -1,23 +1,26 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
 import com.mayada1994.mydictionary_mvi.R
-import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.entities.Language
 import com.mayada1994.mydictionary_mvi.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvi.items.DefaultLanguageItem
 import com.mayada1994.mydictionary_mvi.repositories.LanguageRepository
 import com.mayada1994.mydictionary_mvi.states.DefaultLanguageState
+import com.mayada1994.mydictionary_mvi.utils.CacheUtils
 import com.mayada1994.mydictionary_mvi.utils.LanguageUtils
 import io.reactivex.Observable
 
-class DefaultLanguageInteractor(private val languageRepository: LanguageRepository) {
+class DefaultLanguageInteractor(
+    private val languageRepository: LanguageRepository,
+    private val cacheUtils: CacheUtils
+) {
 
     private var defaultLanguage: String? = null
 
     private var currentLanguages: List<Language> = emptyList()
 
     fun getData(): Observable<DefaultLanguageState> {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             return getLanguages(LanguageUtils.getLanguageByCode(it)!!)
         }
@@ -66,7 +69,7 @@ class DefaultLanguageInteractor(private val languageRepository: LanguageReposito
     }
 
     fun setDefaultLanguage(language: DefaultLanguageItem): Observable<DefaultLanguageState> {
-        DictionaryComponent.cacheUtils.defaultLanguage = language.locale
+        cacheUtils.defaultLanguage = language.locale
         LanguageUtils.getLanguageByCode(language.locale)?.let {
             defaultLanguage = it.locale
             return Observable.just(DefaultLanguageState.ToolbarState(it))

@@ -2,12 +2,12 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import androidx.fragment.app.Fragment
 import com.mayada1994.mydictionary_hybrid.R
-import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.fragments.MainFragment
 import com.mayada1994.mydictionary_hybrid.items.LanguageItem
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
+import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
 import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,7 +15,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 
-class AddLanguagesViewModel(private val languageRepository: LanguageRepository): BaseViewModel() {
+class AddLanguagesViewModel(
+    private val languageRepository: LanguageRepository,
+    private val cacheUtils: CacheUtils
+) : BaseViewModel() {
 
     private var initialScreen: Boolean = true
 
@@ -63,7 +66,7 @@ class AddLanguagesViewModel(private val languageRepository: LanguageRepository):
                 .subscribeWith(object : DisposableCompletableObserver() {
                     override fun onComplete() {
                         if (initialScreen) {
-                            DictionaryComponent.cacheUtils.defaultLanguage = languages[0].locale
+                            cacheUtils.defaultLanguage = languages[0].locale
                             setEvent(AddLanguagesEvent.ShowSelectedScreen(MainFragment::class.java))
                         } else {
                             setEvent(AddLanguagesEvent.OnBackPressed)

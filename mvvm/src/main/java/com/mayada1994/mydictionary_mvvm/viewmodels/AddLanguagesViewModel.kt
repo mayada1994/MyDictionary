@@ -4,12 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mayada1994.mydictionary_mvvm.R
-import com.mayada1994.mydictionary_mvvm.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvvm.entities.Language
 import com.mayada1994.mydictionary_mvvm.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvvm.fragments.MainFragment
 import com.mayada1994.mydictionary_mvvm.items.LanguageItem
 import com.mayada1994.mydictionary_mvvm.repositories.LanguageRepository
+import com.mayada1994.mydictionary_mvvm.utils.CacheUtils
 import com.mayada1994.mydictionary_mvvm.utils.LanguageUtils
 import com.mayada1994.mydictionary_mvvm.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +17,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 
-class AddLanguagesViewModel(private val languageRepository: LanguageRepository): ViewModel() {
+class AddLanguagesViewModel(
+    private val languageRepository: LanguageRepository,
+    private val cacheUtils: CacheUtils
+) : ViewModel() {
 
     private var initialScreen: Boolean = true
 
@@ -77,7 +80,7 @@ class AddLanguagesViewModel(private val languageRepository: LanguageRepository):
                 .subscribeWith(object : DisposableCompletableObserver() {
                     override fun onComplete() {
                         if (initialScreen) {
-                            DictionaryComponent.cacheUtils.defaultLanguage = languages[0].locale
+                            cacheUtils.defaultLanguage = languages[0].locale
                             _selectedScreen.postValue(MainFragment::class.java)
                         } else {
                             _onBackPressed.postValue(true)

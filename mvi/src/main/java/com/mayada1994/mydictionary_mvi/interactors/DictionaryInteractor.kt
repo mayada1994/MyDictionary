@@ -1,22 +1,24 @@
 package com.mayada1994.mydictionary_mvi.interactors
 
-import android.text.Editable
 import androidx.annotation.StringRes
 import com.mayada1994.mydictionary_mvi.R
-import com.mayada1994.mydictionary_mvi.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvi.entities.LanguageInfo
 import com.mayada1994.mydictionary_mvi.entities.Word
 import com.mayada1994.mydictionary_mvi.repositories.WordRepository
 import com.mayada1994.mydictionary_mvi.states.DictionaryState
+import com.mayada1994.mydictionary_mvi.utils.CacheUtils
 import com.mayada1994.mydictionary_mvi.utils.LanguageUtils
 import io.reactivex.Observable
 
-class DictionaryInteractor(private val wordRepository: WordRepository) {
+class DictionaryInteractor(
+    private val wordRepository: WordRepository,
+    private val cacheUtils: CacheUtils
+) {
 
     private var defaultLanguage: String? = null
 
     fun getData(): Observable<DictionaryState> {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             LanguageUtils.getLanguageByCode(it)?.let {
                 return getWords(it)
@@ -42,7 +44,7 @@ class DictionaryInteractor(private val wordRepository: WordRepository) {
         return Observable.just(DictionaryState.ShowAddNewWordDialogState)
     }
 
-    fun onSaveButtonClick(word: Editable?, translation: Editable?): Observable<DictionaryState> {
+    fun onSaveButtonClick(word: String?, translation: String?): Observable<DictionaryState> {
         if (word.isNullOrBlank() || translation.isNullOrBlank()) {
             return Observable.just(DictionaryState.CompletedState(R.string.fill_all_fields_prompt))
         }

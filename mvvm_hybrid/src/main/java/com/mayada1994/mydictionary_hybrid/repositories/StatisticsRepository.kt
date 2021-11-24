@@ -11,6 +11,4 @@ class StatisticsRepository(private val statisticsDao: StatisticsDao) {
 
     fun insertStatistics(statistics: Statistics): Completable = statisticsDao.insertStatistics(statistics)
 
-    fun deleteStatistics(statistics: Statistics): Completable = statisticsDao.deleteStatistics(statistics)
-
 }

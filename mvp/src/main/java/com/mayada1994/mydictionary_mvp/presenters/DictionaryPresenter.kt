@@ -1,11 +1,10 @@
 package com.mayada1994.mydictionary_mvp.presenters
 
-import android.text.Editable
 import com.mayada1994.mydictionary_mvp.R
 import com.mayada1994.mydictionary_mvp.contracts.DictionaryContract
-import com.mayada1994.mydictionary_mvp.di.DictionaryComponent
 import com.mayada1994.mydictionary_mvp.entities.Word
 import com.mayada1994.mydictionary_mvp.models.WordDataSource
+import com.mayada1994.mydictionary_mvp.utils.CacheUtils
 import com.mayada1994.mydictionary_mvp.utils.LanguageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +14,8 @@ import io.reactivex.schedulers.Schedulers
 
 class DictionaryPresenter(
     private val viewInterface: DictionaryContract.ViewInterface,
-    private val wordDataSource: WordDataSource
+    private val wordDataSource: WordDataSource,
+    private val cacheUtils: CacheUtils
 ): DictionaryContract.PresenterInterface {
 
     private val compositeDisposable = CompositeDisposable()
@@ -23,7 +23,7 @@ class DictionaryPresenter(
     private var defaultLanguage: String? = null
 
     override fun init() {
-        DictionaryComponent.cacheUtils.defaultLanguage?.let {
+        cacheUtils.defaultLanguage?.let {
             defaultLanguage = it
             getWords(it)
             LanguageUtils.getLanguageByCode(it)?.let {
@@ -36,7 +36,7 @@ class DictionaryPresenter(
         viewInterface.showAddNewWordDialog()
     }
 
-    override fun onSaveButtonClick(word: Editable?, translation: Editable?) {
+    override fun onSaveButtonClick(word: String?, translation: String?) {
         if (word.isNullOrBlank() || translation.isNullOrBlank()) {
             viewInterface.showMessage(R.string.fill_all_fields_prompt)
             return

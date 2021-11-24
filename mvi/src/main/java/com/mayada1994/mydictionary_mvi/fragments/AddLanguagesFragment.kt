@@ -41,7 +41,7 @@ class AddLanguagesFragment : Fragment(), AddLanguagesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = AddLanguagesPresenter(AddLanguagesInteractor(DictionaryComponent.languageRepository))
+        presenter = AddLanguagesPresenter(AddLanguagesInteractor(DictionaryComponent.languageRepository, DictionaryComponent.cacheUtils))
         presenter.bind(this)
     }
 
