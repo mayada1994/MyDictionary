@@ -15,9 +15,9 @@ import com.mayada1994.mydictionary_hybrid.decorators.WordsDecoration
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.StatisticsEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.StatisticsViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.StatisticsViewModel.StatisticsEvent
 
 class StatisticsFragment : Fragment() {
 

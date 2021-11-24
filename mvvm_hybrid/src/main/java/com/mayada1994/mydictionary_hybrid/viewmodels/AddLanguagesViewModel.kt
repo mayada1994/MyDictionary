@@ -1,15 +1,14 @@
 package com.mayada1994.mydictionary_hybrid.viewmodels
 
-import androidx.fragment.app.Fragment
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.AddLanguagesEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
 import com.mayada1994.mydictionary_hybrid.fragments.MainFragment
-import com.mayada1994.mydictionary_hybrid.items.LanguageItem
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
@@ -25,14 +24,6 @@ class AddLanguagesViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     private val selectedLanguages: ArrayList<LanguageInfo> = arrayListOf()
-
-    sealed class AddLanguagesEvent {
-        data class SetLanguages(val languages: List<LanguageItem>) : ViewEvent
-
-        data class ShowSelectedScreen(val fragmentClass: Class<out Fragment>) : ViewEvent
-
-        object OnBackPressed: ViewEvent
-    }
 
     fun init(usedLanguages: List<Language>) {
         setEvent(AddLanguagesEvent.SetLanguages(

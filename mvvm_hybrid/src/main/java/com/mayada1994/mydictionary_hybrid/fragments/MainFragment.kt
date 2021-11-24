@@ -11,9 +11,9 @@ import androidx.fragment.app.viewModels
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.databinding.FragmentMainBinding
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.MainMenuEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.MainMenuViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.MainMenuViewModel.MainMenuEvent
 
 class MainFragment : Fragment() {
 

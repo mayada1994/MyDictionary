@@ -5,11 +5,13 @@ import androidx.lifecycle.Observer
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.DefaultLanguageEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.items.DefaultLanguageItem
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Single
@@ -78,11 +80,11 @@ class DefaultLanguageViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             languageRepository.getLanguages()
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
 
     }
@@ -136,11 +138,11 @@ class DefaultLanguageViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             languageRepository.getLanguages()
-            observerViewEvent.onChanged(DefaultLanguageViewModel.DefaultLanguageEvent.SetLanguages(languageItems))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(DefaultLanguageEvent.SetLanguages(languageItems))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
 
         assertEquals(languages, viewModel::class.java.getDeclaredField("currentLanguages").apply { isAccessible = true }.get(viewModel) as List<Language>)
@@ -174,8 +176,8 @@ class DefaultLanguageViewModelTest {
 
         //Then
         verify(exactly = 0) {
-            observerViewEvent.onChanged(DefaultLanguageViewModel.DefaultLanguageEvent.SetAddButtonVisibility(true))
-            observerViewEvent.onChanged(DefaultLanguageViewModel.DefaultLanguageEvent.SetAddButtonVisibility(false))
+            observerViewEvent.onChanged(DefaultLanguageEvent.SetAddButtonVisibility(true))
+            observerViewEvent.onChanged(DefaultLanguageEvent.SetAddButtonVisibility(false))
         }
     }
 
@@ -207,7 +209,7 @@ class DefaultLanguageViewModelTest {
 
         //Then
         verify {
-            observerViewEvent.onChanged(DefaultLanguageViewModel.DefaultLanguageEvent.SetAddButtonVisibility(false))
+            observerViewEvent.onChanged(DefaultLanguageEvent.SetAddButtonVisibility(false))
         }
     }
 
@@ -240,10 +242,10 @@ class DefaultLanguageViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             languageRepository.getLanguages()
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -253,7 +255,7 @@ class DefaultLanguageViewModelTest {
         viewModel.onAddButtonClick()
 
         //Then
-        verify { observerViewEvent.onChanged(DefaultLanguageViewModel.DefaultLanguageEvent.NavigateToAddLanguagesFragment(emptyList())) }
+        verify { observerViewEvent.onChanged(DefaultLanguageEvent.NavigateToAddLanguagesFragment(emptyList())) }
     }
 
     /**
@@ -286,7 +288,7 @@ class DefaultLanguageViewModelTest {
         //Then
         verifyOrder {
             LanguageUtils.getLanguageByCode(defaultLanguageItem.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
         }
     }
     

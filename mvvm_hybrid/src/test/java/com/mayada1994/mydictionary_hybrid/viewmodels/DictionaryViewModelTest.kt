@@ -5,9 +5,11 @@ import androidx.lifecycle.Observer
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Word
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.DictionaryEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Completable
@@ -77,11 +79,11 @@ class DictionaryViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
         }
     }
 
@@ -91,7 +93,7 @@ class DictionaryViewModelTest {
         viewModel.onAddButtonClick()
 
         //Then
-        verify { observerViewEvent.onChanged(DictionaryViewModel.DictionaryEvent.ShowAddNewWordDialog) }
+        verify { observerViewEvent.onChanged(DictionaryEvent.ShowAddNewWordDialog) }
     }
 
     @Test
@@ -104,7 +106,7 @@ class DictionaryViewModelTest {
         viewModel.onSaveButtonClick(word, translation)
 
         //Then
-        verify { observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.fill_all_fields_prompt)) }
+        verify { observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.fill_all_fields_prompt)) }
     }
 
     @Test
@@ -117,7 +119,7 @@ class DictionaryViewModelTest {
         viewModel.onSaveButtonClick(word, translation)
 
         //Then
-        verify { observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.fill_all_fields_prompt)) }
+        verify { observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.fill_all_fields_prompt)) }
     }
 
     @Test
@@ -196,11 +198,11 @@ class DictionaryViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(false))
-            observerViewEvent.onChanged(DictionaryViewModel.DictionaryEvent.SetWords(words))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(false))
+            observerViewEvent.onChanged(DictionaryEvent.SetWords(words))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -231,10 +233,10 @@ class DictionaryViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -267,11 +269,11 @@ class DictionaryViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -310,7 +312,7 @@ class DictionaryViewModelTest {
         //Then
         verify {
             wordRepository.insertWord(Word(word, translation, languageInfo.locale))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.word_added_successfully))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.word_added_successfully))
         }
     }
 
@@ -349,7 +351,7 @@ class DictionaryViewModelTest {
         //Then
         verify {
             wordRepository.insertWord(Word(word, translation, languageInfo.locale))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
         }
     }
 
@@ -383,7 +385,7 @@ class DictionaryViewModelTest {
         //Then
         verify {
             wordRepository.deleteWord(word)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.word_deleted_successfully))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.word_deleted_successfully))
         }
     }
 
@@ -417,7 +419,7 @@ class DictionaryViewModelTest {
         //Then
         verify {
             wordRepository.deleteWord(word)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
         }
     }
     

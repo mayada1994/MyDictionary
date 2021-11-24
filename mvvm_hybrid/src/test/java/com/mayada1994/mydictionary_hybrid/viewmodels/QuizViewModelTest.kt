@@ -6,11 +6,13 @@ import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
 import com.mayada1994.mydictionary_hybrid.entities.Word
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.QuizEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.items.QuestionItem
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Completable
@@ -82,12 +84,12 @@ class QuizViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(QuizViewModel.QuizEvent.SetResultButtonVisibility(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(QuizEvent.SetResultButtonVisibility(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
         }
     }
 
@@ -136,14 +138,14 @@ class QuizViewModelTest {
 
         //Then
         verify {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(false))
-            observerViewEvent.onChanged(QuizViewModel.QuizEvent.SetResultButtonVisibility(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(false))
+            observerViewEvent.onChanged(QuizEvent.SetResultButtonVisibility(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
 
-        assert(events.contains(QuizViewModel.QuizEvent.SetQuestions::class.java))
+        assert(events.contains(QuizEvent.SetQuestions::class.java))
     }
 
     /**
@@ -174,11 +176,11 @@ class QuizViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(QuizViewModel.QuizEvent.SetResultButtonVisibility(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(QuizEvent.SetResultButtonVisibility(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -212,12 +214,12 @@ class QuizViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             wordRepository.getWordsByLanguage(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(QuizViewModel.QuizEvent.SetResultButtonVisibility(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(QuizEvent.SetResultButtonVisibility(false))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -230,7 +232,7 @@ class QuizViewModelTest {
         viewModel.getResult(questionItems)
 
         //Then
-        verify { observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error)) }
+        verify { observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error)) }
     }
 
     @Test
@@ -269,10 +271,10 @@ class QuizViewModelTest {
 
         //Then
         verify {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
             statisticsRepository.insertStatistics(capture(statSlot))
-            observerViewEvent.onChanged(QuizViewModel.QuizEvent.SetResult("2/4"))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(QuizEvent.SetResult("2/4"))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
 
         assertEquals("2/4", statSlot.captured.result)

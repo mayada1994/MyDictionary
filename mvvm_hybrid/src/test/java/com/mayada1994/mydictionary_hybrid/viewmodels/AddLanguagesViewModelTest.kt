@@ -5,11 +5,13 @@ import androidx.lifecycle.Observer
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.AddLanguagesEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.fragments.MainFragment
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Completable
@@ -67,7 +69,7 @@ class AddLanguagesViewModelTest {
 
         //Then
         verify {
-            observerViewEvent.onChanged(AddLanguagesViewModel.AddLanguagesEvent.SetLanguages(languageItems))
+            observerViewEvent.onChanged(AddLanguagesEvent.SetLanguages(languageItems))
         }
 
         assertEquals(true, viewModel::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(viewModel) as Boolean)
@@ -116,7 +118,7 @@ class AddLanguagesViewModelTest {
 
         //Then
         verify {
-            observerViewEvent.onChanged(AddLanguagesViewModel.AddLanguagesEvent.SetLanguages(languageItems))
+            observerViewEvent.onChanged(AddLanguagesEvent.SetLanguages(languageItems))
         }
 
         assertEquals(false, viewModel::class.java.getDeclaredField("initialScreen").apply { isAccessible = true }.get(viewModel) as Boolean)
@@ -164,7 +166,7 @@ class AddLanguagesViewModelTest {
         viewModel.onSaveButtonClick()
 
         //Then
-        verify { observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.pick_languages_warning)) }
+        verify { observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.pick_languages_warning)) }
     }
 
     /**
@@ -208,9 +210,9 @@ class AddLanguagesViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(AddLanguagesViewModel.AddLanguagesEvent.OnBackPressed)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(AddLanguagesEvent.OnBackPressed)
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -257,9 +259,9 @@ class AddLanguagesViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(AddLanguagesViewModel.AddLanguagesEvent.ShowSelectedScreen(MainFragment::class.java))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(AddLanguagesEvent.ShowSelectedScreen(MainFragment::class.java))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -305,9 +307,9 @@ class AddLanguagesViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(AddLanguagesViewModel.AddLanguagesEvent.OnBackPressed)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(AddLanguagesEvent.OnBackPressed)
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -353,8 +355,8 @@ class AddLanguagesViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
         }
     }
     

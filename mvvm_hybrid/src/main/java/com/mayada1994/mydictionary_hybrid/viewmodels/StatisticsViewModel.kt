@@ -2,10 +2,11 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.StatisticsEvent
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -15,10 +16,6 @@ class StatisticsViewModel(
     private val statisticsRepository: StatisticsRepository,
     private val cacheUtils: CacheUtils
 ) : BaseViewModel() {
-
-    sealed class StatisticsEvent {
-        data class SetStats(val stats: List<Statistics>) : ViewEvent
-    }
 
     private val compositeDisposable = CompositeDisposable()
 

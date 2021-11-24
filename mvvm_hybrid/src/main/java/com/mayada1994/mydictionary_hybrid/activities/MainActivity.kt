@@ -10,8 +10,8 @@ import androidx.fragment.app.commit
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.databinding.ActivityMainBinding
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
+import com.mayada1994.mydictionary_hybrid.events.MainEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.MainViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.MainViewModel.MainEvent
 
 class MainActivity : AppCompatActivity() {
 

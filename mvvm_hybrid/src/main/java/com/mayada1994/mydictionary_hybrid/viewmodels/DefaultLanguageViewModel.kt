@@ -2,11 +2,12 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Language
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.DefaultLanguageEvent
 import com.mayada1994.mydictionary_hybrid.items.DefaultLanguageItem
 import com.mayada1994.mydictionary_hybrid.repositories.LanguageRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -16,14 +17,6 @@ class DefaultLanguageViewModel(
     private val languageRepository: LanguageRepository,
     private val cacheUtils: CacheUtils
 ) : BaseViewModel() {
-
-    sealed class DefaultLanguageEvent {
-        data class SetLanguages(val languages: List<DefaultLanguageItem>) : ViewEvent
-
-        data class SetAddButtonVisibility(val isVisible: Boolean) : ViewEvent
-
-        data class NavigateToAddLanguagesFragment(val languages: List<Language>) : ViewEvent
-    }
 
     private var currentLanguages: List<Language> = emptyList()
 

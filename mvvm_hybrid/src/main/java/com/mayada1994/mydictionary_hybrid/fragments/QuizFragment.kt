@@ -15,10 +15,10 @@ import com.mayada1994.mydictionary_hybrid.adapters.QuizAdapter
 import com.mayada1994.mydictionary_hybrid.databinding.FragmentQuizBinding
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.QuizEvent
 import com.mayada1994.mydictionary_hybrid.items.QuestionItem
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.QuizViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.QuizViewModel.QuizEvent
 
 class QuizFragment : Fragment() {
 

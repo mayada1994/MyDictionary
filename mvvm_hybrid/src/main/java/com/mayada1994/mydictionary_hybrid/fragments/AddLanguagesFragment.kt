@@ -14,10 +14,10 @@ import com.mayada1994.mydictionary_hybrid.databinding.FragmentAddLanguagesBindin
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.AddLanguagesEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
 import com.mayada1994.mydictionary_hybrid.items.LanguageItem
 import com.mayada1994.mydictionary_hybrid.viewmodels.AddLanguagesViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.AddLanguagesViewModel.AddLanguagesEvent
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
 
 class AddLanguagesFragment : Fragment() {
 

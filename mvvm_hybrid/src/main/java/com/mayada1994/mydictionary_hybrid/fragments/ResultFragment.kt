@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.mayada1994.mydictionary_hybrid.databinding.FragmentResultBinding
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.ResultViewModel
 
 class ResultFragment : Fragment() {

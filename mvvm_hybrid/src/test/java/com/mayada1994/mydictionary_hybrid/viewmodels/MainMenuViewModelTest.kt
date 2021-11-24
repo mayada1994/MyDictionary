@@ -3,11 +3,13 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.mayada1994.mydictionary_hybrid.R
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.MainMenuEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.fragments.DefaultLanguageFragment
 import com.mayada1994.mydictionary_hybrid.fragments.DictionaryFragment
 import com.mayada1994.mydictionary_hybrid.fragments.QuizFragment
 import com.mayada1994.mydictionary_hybrid.fragments.StatisticsFragment
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import org.junit.After
@@ -59,7 +61,7 @@ class MainMenuViewModelTest {
         //Then
         verify {
             observerViewEvent.onChanged(
-                MainMenuViewModel.MainMenuEvent.ShowSelectedScreen(
+                MainMenuEvent.ShowSelectedScreen(
                     fragmentClass = fragmentClass,
                     selectedMenuItemId = 0
                 )
@@ -85,7 +87,7 @@ class MainMenuViewModelTest {
         //Then
         verify {
             observerViewEvent.onChanged(
-                MainMenuViewModel.MainMenuEvent.ShowSelectedScreen(
+                MainMenuEvent.ShowSelectedScreen(
                     fragmentClass = fragmentClass,
                     selectedMenuItemId = 1
                 )
@@ -111,7 +113,7 @@ class MainMenuViewModelTest {
         //Then
         verify {
             observerViewEvent.onChanged(
-                MainMenuViewModel.MainMenuEvent.ShowSelectedScreen(
+                MainMenuEvent.ShowSelectedScreen(
                     fragmentClass = fragmentClass,
                     selectedMenuItemId = 2
                 )
@@ -137,7 +139,7 @@ class MainMenuViewModelTest {
         //Then
         verify {
             observerViewEvent.onChanged(
-                MainMenuViewModel.MainMenuEvent.ShowSelectedScreen(
+                MainMenuEvent.ShowSelectedScreen(
                     fragmentClass = fragmentClass,
                     selectedMenuItemId = 3
                 )
@@ -162,7 +164,7 @@ class MainMenuViewModelTest {
         //Then
         verify {
             observerViewEvent.onChanged(
-                BaseViewModel.BaseEvent.ShowMessage(R.string.general_error)
+                BaseEvent.ShowMessage(R.string.general_error)
             )
         }
     }

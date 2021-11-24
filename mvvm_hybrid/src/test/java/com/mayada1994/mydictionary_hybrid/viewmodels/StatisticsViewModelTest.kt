@@ -5,10 +5,12 @@ import androidx.lifecycle.Observer
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.StatisticsEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import io.reactivex.Single
@@ -77,10 +79,10 @@ class StatisticsViewModelTest {
         //Then
         verifyOrder {
             LanguageUtils.getLanguageByCode(languageInfo.locale)
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.SetDefaultLanguage(languageInfo))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.SetDefaultLanguage(languageInfo))
         }
     }
 
@@ -121,10 +123,10 @@ class StatisticsViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(false))
-            observerViewEvent.onChanged(StatisticsViewModel.StatisticsEvent.SetStats(stats))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(false))
+            observerViewEvent.onChanged(StatisticsEvent.SetStats(stats))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -155,9 +157,9 @@ class StatisticsViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
 
@@ -190,10 +192,10 @@ class StatisticsViewModelTest {
 
         //Then
         verifyOrder {
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowPlaceholder(true))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowMessage(R.string.general_error))
-            observerViewEvent.onChanged(BaseViewModel.BaseEvent.ShowProgress(false))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(true))
+            observerViewEvent.onChanged(BaseEvent.ShowPlaceholder(true))
+            observerViewEvent.onChanged(BaseEvent.ShowMessage(R.string.general_error))
+            observerViewEvent.onChanged(BaseEvent.ShowProgress(false))
         }
     }
     

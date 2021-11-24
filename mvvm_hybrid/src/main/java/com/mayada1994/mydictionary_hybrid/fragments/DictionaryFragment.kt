@@ -20,9 +20,9 @@ import com.mayada1994.mydictionary_hybrid.decorators.WordsDecoration
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
 import com.mayada1994.mydictionary_hybrid.entities.Word
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.DictionaryEvent
 import com.mayada1994.mydictionary_hybrid.viewmodels.DictionaryViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.DictionaryViewModel.DictionaryEvent
 import java.util.*
 
 class DictionaryFragment : Fragment() {

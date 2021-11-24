@@ -2,10 +2,11 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.mayada1994.mydictionary_hybrid.events.MainEvent
+import com.mayada1994.mydictionary_hybrid.events.ViewEvent
 import com.mayada1994.mydictionary_hybrid.fragments.AddLanguagesFragment
 import com.mayada1994.mydictionary_hybrid.fragments.MainFragment
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import com.mayada1994.rules.RxImmediateSchedulerRule
 import io.mockk.*
 import org.junit.After
@@ -50,7 +51,7 @@ class MainViewModelTest {
         viewModel.init()
 
         //Then
-        verify { observerViewEvent.onChanged(MainViewModel.MainEvent.ShowSelectedScreen(AddLanguagesFragment::class.java)) }
+        verify { observerViewEvent.onChanged(MainEvent.ShowSelectedScreen(AddLanguagesFragment::class.java)) }
     }
 
     @Test
@@ -62,7 +63,7 @@ class MainViewModelTest {
         viewModel.init()
 
         //Then
-        verify { observerViewEvent.onChanged(MainViewModel.MainEvent.ShowSelectedScreen(MainFragment::class.java)) }
+        verify { observerViewEvent.onChanged(MainEvent.ShowSelectedScreen(MainFragment::class.java)) }
     }
 
 

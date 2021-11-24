@@ -3,12 +3,13 @@ package com.mayada1994.mydictionary_hybrid.viewmodels
 import com.mayada1994.mydictionary_hybrid.R
 import com.mayada1994.mydictionary_hybrid.entities.Statistics
 import com.mayada1994.mydictionary_hybrid.entities.Word
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.QuizEvent
 import com.mayada1994.mydictionary_hybrid.items.QuestionItem
 import com.mayada1994.mydictionary_hybrid.repositories.StatisticsRepository
 import com.mayada1994.mydictionary_hybrid.repositories.WordRepository
 import com.mayada1994.mydictionary_hybrid.utils.CacheUtils
 import com.mayada1994.mydictionary_hybrid.utils.LanguageUtils
-import com.mayada1994.mydictionary_hybrid.utils.ViewEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
@@ -21,14 +22,6 @@ class QuizViewModel(
     private val statisticsRepository: StatisticsRepository,
     private val cacheUtils: CacheUtils
 ) : BaseViewModel() {
-
-    sealed class QuizEvent {
-        data class SetQuestions(val questions: List<QuestionItem>) : ViewEvent
-
-        data class SetResult(val result: String) : ViewEvent
-
-        data class SetResultButtonVisibility(val isVisible: Boolean) : ViewEvent
-    }
 
     private val compositeDisposable = CompositeDisposable()
 

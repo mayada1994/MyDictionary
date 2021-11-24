@@ -16,10 +16,10 @@ import com.mayada1994.mydictionary_hybrid.databinding.FragmentDefaultLanguageBin
 import com.mayada1994.mydictionary_hybrid.di.DictionaryComponent
 import com.mayada1994.mydictionary_hybrid.entities.Language
 import com.mayada1994.mydictionary_hybrid.entities.LanguageInfo
+import com.mayada1994.mydictionary_hybrid.events.BaseEvent
+import com.mayada1994.mydictionary_hybrid.events.DefaultLanguageEvent
 import com.mayada1994.mydictionary_hybrid.items.DefaultLanguageItem
-import com.mayada1994.mydictionary_hybrid.viewmodels.BaseViewModel
 import com.mayada1994.mydictionary_hybrid.viewmodels.DefaultLanguageViewModel
-import com.mayada1994.mydictionary_hybrid.viewmodels.DefaultLanguageViewModel.DefaultLanguageEvent
 
 class DefaultLanguageFragment : Fragment() {
 
@@ -62,11 +62,11 @@ class DefaultLanguageFragment : Fragment() {
 
                 is DefaultLanguageEvent.NavigateToAddLanguagesFragment -> navigateToAddLanguagesFragment(event.languages)
 
-                is BaseViewModel.BaseEvent.SetDefaultLanguage -> setToolbar(event.defaultLanguage)
+                is BaseEvent.SetDefaultLanguage -> setToolbar(event.defaultLanguage)
 
-                is BaseViewModel.BaseEvent.ShowProgress -> showProgress(event.isProgressVisible)
+                is BaseEvent.ShowProgress -> showProgress(event.isProgressVisible)
 
-                is BaseViewModel.BaseEvent.ShowMessage -> showMessage(event.resId)
+                is BaseEvent.ShowMessage -> showMessage(event.resId)
             }
         })
     }
