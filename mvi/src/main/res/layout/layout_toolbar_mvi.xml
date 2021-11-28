@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/tacao"
+    android:scaleType="fitXY">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDefaultLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgDefaultFlag"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/english_language" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgDefaultFlag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="@dimen/small_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtDefaultLanguage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_england" />
+</androidx.constraintlayout.widget.ConstraintLayout>

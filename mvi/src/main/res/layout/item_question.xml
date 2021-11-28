@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/standard_margin">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/corn_field"
+        android:paddingHorizontal="@dimen/standard_margin"
+        android:paddingVertical="@dimen/small_margin"
+        android:textColor="@color/raw_sienna"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1. green" />
+
+    <RadioGroup
+        android:id="@+id/groupAnswers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/small_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtWord">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btnFirstAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/raw_sienna"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/small_margin"
+            android:textColor="@color/raw_sienna"
+            android:textSize="18sp"
+            tools:checked="true"
+            tools:text="зелений" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btnSecondAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/raw_sienna"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/small_margin"
+            android:textColor="@color/raw_sienna"
+            android:textSize="18sp"
+            tools:text="жовтий" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btnThirdAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/raw_sienna"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/small_margin"
+            android:textColor="@color/raw_sienna"
+            android:textSize="18sp"
+            tools:text="синій" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btnFourthAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/raw_sienna"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/small_margin"
+            android:textColor="@color/raw_sienna"
+            android:textSize="18sp"
+            tools:text="червоний" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/standard_margin">
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/raw_sienna"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wordContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/small_margin">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnSpeech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_speech"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtWord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:gravity="center_vertical"
+            android:textColor="@color/raw_sienna"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btnSpeech"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toEndOf="@id/btnSpeech"
+            app:layout_constraintTop_toTopOf="@id/btnSpeech"
+            tools:text="green" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTranslation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:gravity="center_vertical"
+            android:textColor="@color/raw_sienna"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btnSpeech"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/btnSpeech"
+            tools:text="зелений" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
